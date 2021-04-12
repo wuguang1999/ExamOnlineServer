@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volcano.examonlineserv.mapper.QuestionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.volcano.examonlineserv.bean.QuestionInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="level" jdbcType="CHAR" property="level" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="analysis" jdbcType="VARCHAR" property="analysis" />
+    <result column="correctAnswer" jdbcType="VARCHAR" property="correctanswer" />
+    <result column="optionA" jdbcType="VARCHAR" property="optiona" />
+    <result column="optionB" jdbcType="VARCHAR" property="optionb" />
+    <result column="optionC" jdbcType="VARCHAR" property="optionc" />
+    <result column="optionD" jdbcType="VARCHAR" property="optiond" />
+    <result column="optionE" jdbcType="VARCHAR" property="optione" />
+    <result column="isSelect" jdbcType="INTEGER" property="isselect" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, description, type, img, level, source, analysis, correctAnswer, optionA, optionB, 
+    optionC, optionD, optionE, isSelect
+  </sql>
+  <select id="selectByExample" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from questioninfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from questioninfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from questioninfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample">
+    delete from questioninfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+    insert into questioninfo (id, description, type, 
+      img, level, source, analysis, 
+      correctAnswer, optionA, optionB, 
+      optionC, optionD, optionE, 
+      isSelect)
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{img,jdbcType=VARCHAR}, #{level,jdbcType=CHAR}, #{source,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, 
+      #{correctanswer,jdbcType=VARCHAR}, #{optiona,jdbcType=VARCHAR}, #{optionb,jdbcType=VARCHAR}, 
+      #{optionc,jdbcType=VARCHAR}, #{optiond,jdbcType=VARCHAR}, #{optione,jdbcType=VARCHAR}, 
+      #{isselect,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+    insert into questioninfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="analysis != null">
+        analysis,
+      </if>
+      <if test="correctanswer != null">
+        correctAnswer,
+      </if>
+      <if test="optiona != null">
+        optionA,
+      </if>
+      <if test="optionb != null">
+        optionB,
+      </if>
+      <if test="optionc != null">
+        optionC,
+      </if>
+      <if test="optiond != null">
+        optionD,
+      </if>
+      <if test="optione != null">
+        optionE,
+      </if>
+      <if test="isselect != null">
+        isSelect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=CHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null">
+        #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="correctanswer != null">
+        #{correctanswer,jdbcType=VARCHAR},
+      </if>
+      <if test="optiona != null">
+        #{optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="optionb != null">
+        #{optionb,jdbcType=VARCHAR},
+      </if>
+      <if test="optionc != null">
+        #{optionc,jdbcType=VARCHAR},
+      </if>
+      <if test="optiond != null">
+        #{optiond,jdbcType=VARCHAR},
+      </if>
+      <if test="optione != null">
+        #{optione,jdbcType=VARCHAR},
+      </if>
+      <if test="isselect != null">
+        #{isselect,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample" resultType="java.lang.Long">
+    select count(*) from questioninfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update questioninfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=CHAR},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysis != null">
+        analysis = #{record.analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.correctanswer != null">
+        correctAnswer = #{record.correctanswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optiona != null">
+        optionA = #{record.optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionb != null">
+        optionB = #{record.optionb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionc != null">
+        optionC = #{record.optionc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optiond != null">
+        optionD = #{record.optiond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optione != null">
+        optionE = #{record.optione,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isselect != null">
+        isSelect = #{record.isselect,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update questioninfo
+    set id = #{record.id,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=CHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=CHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      analysis = #{record.analysis,jdbcType=VARCHAR},
+      correctAnswer = #{record.correctanswer,jdbcType=VARCHAR},
+      optionA = #{record.optiona,jdbcType=VARCHAR},
+      optionB = #{record.optionb,jdbcType=VARCHAR},
+      optionC = #{record.optionc,jdbcType=VARCHAR},
+      optionD = #{record.optiond,jdbcType=VARCHAR},
+      optionE = #{record.optione,jdbcType=VARCHAR},
+      isSelect = #{record.isselect,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+    update questioninfo
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=CHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null">
+        analysis = #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="correctanswer != null">
+        correctAnswer = #{correctanswer,jdbcType=VARCHAR},
+      </if>
+      <if test="optiona != null">
+        optionA = #{optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="optionb != null">
+        optionB = #{optionb,jdbcType=VARCHAR},
+      </if>
+      <if test="optionc != null">
+        optionC = #{optionc,jdbcType=VARCHAR},
+      </if>
+      <if test="optiond != null">
+        optionD = #{optiond,jdbcType=VARCHAR},
+      </if>
+      <if test="optione != null">
+        optionE = #{optione,jdbcType=VARCHAR},
+      </if>
+      <if test="isselect != null">
+        isSelect = #{isselect,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+    update questioninfo
+    set description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      img = #{img,jdbcType=VARCHAR},
+      level = #{level,jdbcType=CHAR},
+      source = #{source,jdbcType=VARCHAR},
+      analysis = #{analysis,jdbcType=VARCHAR},
+      correctAnswer = #{correctanswer,jdbcType=VARCHAR},
+      optionA = #{optiona,jdbcType=VARCHAR},
+      optionB = #{optionb,jdbcType=VARCHAR},
+      optionC = #{optionc,jdbcType=VARCHAR},
+      optionD = #{optiond,jdbcType=VARCHAR},
+      optionE = #{optione,jdbcType=VARCHAR},
+      isSelect = #{isselect,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
