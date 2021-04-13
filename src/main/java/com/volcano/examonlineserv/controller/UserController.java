@@ -18,8 +18,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/userinfo/{phone}")
-    public Result getUserinfo(@PathVariable String phone) {
+    /**
+     * 根据phone获取用户信息
+     * @param phone
+     * @return
+     */
+    @GetMapping("/api/v1/userinfo")
+    public Result getUserinfo(@RequestParam String phone) {
         Result res;
         if(null == phone || phone.equals("")) {
             res = Result.failure(ResultCode.PARAM_IS_INVALID);
@@ -34,7 +39,12 @@ public class UserController {
         return res;
     }
 
-    @PostMapping("/userinfo/register")
+    /**
+     * 注册
+     * @param userTmp
+     * @return
+     */
+    @PostMapping("/api/v1/userinfo/register")
     public Result userRegister(@RequestBody UserTmp userTmp) {
         String phone = userTmp.getPhone();
         String pwd = userTmp.getPwd();
@@ -54,7 +64,12 @@ public class UserController {
         return res;
     }
 
-    @PostMapping("/userinfo/login")
+    /**
+     * 登录
+     * @param userTmp
+     * @return
+     */
+    @PostMapping("/api/v1/userinfo/login")
     public Result userLogin(@RequestBody UserTmp userTmp) {
         Result res = new Result();
         if(null == userTmp || null == userTmp.getPhone()) {

@@ -13,6 +13,8 @@ public class Userinfo {
 
     private String avatar;
 
+    private Integer accumulate;
+
     private Date createat;
 
     public Integer getId() {
@@ -53,6 +55,14 @@ public class Userinfo {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public Integer getAccumulate() {
+        return accumulate;
+    }
+
+    public void setAccumulate(Integer accumulate) {
+        this.accumulate = accumulate;
     }
 
     public Date getCreateat() {

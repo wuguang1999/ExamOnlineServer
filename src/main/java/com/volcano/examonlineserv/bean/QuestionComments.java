@@ -2,14 +2,16 @@ package com.volcano.examonlineserv.bean;
 
 import java.util.Date;
 
-public class Comment {
+public class QuestionComments {
     private Integer id;
 
-    private Integer articleid;
+    private Integer questionid;
 
     private Integer userid;
 
     private String description;
+
+    private String img;
 
     private Date createat;
 
@@ -21,12 +23,12 @@ public class Comment {
         this.id = id;
     }
 
-    public Integer getArticleid() {
-        return articleid;
+    public Integer getQuestionid() {
+        return questionid;
     }
 
-    public void setArticleid(Integer articleid) {
-        this.articleid = articleid;
+    public void setQuestionid(Integer questionid) {
+        this.questionid = questionid;
     }
 
     public Integer getUserid() {
@@ -43,6 +45,14 @@ public class Comment {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 
     public Date getCreateat() {

@@ -164,6 +164,66 @@ public class QuestionInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andSubjectidIsNull() {
+            addCriterion("subjectId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidIsNotNull() {
+            addCriterion("subjectId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidEqualTo(Integer value) {
+            addCriterion("subjectId =", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidNotEqualTo(Integer value) {
+            addCriterion("subjectId <>", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidGreaterThan(Integer value) {
+            addCriterion("subjectId >", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("subjectId >=", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidLessThan(Integer value) {
+            addCriterion("subjectId <", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidLessThanOrEqualTo(Integer value) {
+            addCriterion("subjectId <=", value, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidIn(List<Integer> values) {
+            addCriterion("subjectId in", values, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidNotIn(List<Integer> values) {
+            addCriterion("subjectId not in", values, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidBetween(Integer value1, Integer value2) {
+            addCriterion("subjectId between", value1, value2, "subjectid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectidNotBetween(Integer value1, Integer value2) {
+            addCriterion("subjectId not between", value1, value2, "subjectid");
+            return (Criteria) this;
+        }
+
         public Criteria andDescriptionIsNull() {
             addCriterion("description is null");
             return (Criteria) this;

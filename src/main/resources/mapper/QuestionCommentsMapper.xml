@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.volcano.examonlineserv.mapper.UserinfoMapper">
-  <resultMap id="BaseResultMap" type="com.volcano.examonlineserv.bean.Userinfo">
+<mapper namespace="com.volcano.examonlineserv.mapper.QuestionCommentsMapper">
+  <resultMap id="BaseResultMap" type="com.volcano.examonlineserv.bean.QuestionComments">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="userName" jdbcType="VARCHAR" property="username" />
-    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="accumulate" jdbcType="INTEGER" property="accumulate" />
+    <result column="questionId" jdbcType="INTEGER" property="questionid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
     <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, userName, pwd, avatar, accumulate, createAt
+    id, questionId, userId, description, img, createAt
   </sql>
-  <select id="selectByExample" parameterType="com.volcano.examonlineserv.bean.UserinfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.volcano.examonlineserv.bean.QuestionCommentsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from userinfo
+    from questioncomments
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,47 +87,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from userinfo
+    from questioncomments
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from userinfo
+    delete from questioncomments
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.volcano.examonlineserv.bean.UserinfoExample">
-    delete from userinfo
+  <delete id="deleteByExample" parameterType="com.volcano.examonlineserv.bean.QuestionCommentsExample">
+    delete from questioncomments
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.volcano.examonlineserv.bean.Userinfo">
-    insert into userinfo (id, phone, userName, 
-      pwd, avatar, accumulate, 
-      createAt)
-    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{pwd,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{accumulate,jdbcType=INTEGER}, 
-      #{createat,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.volcano.examonlineserv.bean.QuestionComments">
+    insert into questioncomments (id, questionId, userId, 
+      description, img, createAt
+      )
+    values (#{id,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.volcano.examonlineserv.bean.Userinfo">
-    insert into userinfo
+  <insert id="insertSelective" parameterType="com.volcano.examonlineserv.bean.QuestionComments">
+    insert into questioncomments
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="phone != null">
-        phone,
+      <if test="questionid != null">
+        questionId,
       </if>
-      <if test="username != null">
-        userName,
+      <if test="userid != null">
+        userId,
       </if>
-      <if test="pwd != null">
-        pwd,
+      <if test="description != null">
+        description,
       </if>
-      <if test="avatar != null">
-        avatar,
-      </if>
-      <if test="accumulate != null">
-        accumulate,
+      <if test="img != null">
+        img,
       </if>
       <if test="createat != null">
         createAt,
@@ -138,52 +134,46 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
+      <if test="questionid != null">
+        #{questionid,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
       </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        #{avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="accumulate != null">
-        #{accumulate,jdbcType=INTEGER},
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
       </if>
       <if test="createat != null">
         #{createat,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.volcano.examonlineserv.bean.UserinfoExample" resultType="java.lang.Long">
-    select count(*) from userinfo
+  <select id="countByExample" parameterType="com.volcano.examonlineserv.bean.QuestionCommentsExample" resultType="java.lang.Long">
+    select count(*) from questioncomments
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update userinfo
+    update questioncomments
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
+      <if test="record.questionid != null">
+        questionId = #{record.questionid,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        userName = #{record.username,jdbcType=VARCHAR},
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=INTEGER},
       </if>
-      <if test="record.pwd != null">
-        pwd = #{record.pwd,jdbcType=VARCHAR},
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.avatar != null">
-        avatar = #{record.avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="record.accumulate != null">
-        accumulate = #{record.accumulate,jdbcType=INTEGER},
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
       </if>
       <if test="record.createat != null">
         createAt = #{record.createat,jdbcType=TIMESTAMP},
@@ -194,35 +184,31 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update userinfo
+    update questioncomments
     set id = #{record.id,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      pwd = #{record.pwd,jdbcType=VARCHAR},
-      avatar = #{record.avatar,jdbcType=VARCHAR},
-      accumulate = #{record.accumulate,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
       createAt = #{record.createat,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.volcano.examonlineserv.bean.Userinfo">
-    update userinfo
+  <update id="updateByPrimaryKeySelective" parameterType="com.volcano.examonlineserv.bean.QuestionComments">
+    update questioncomments
     <set>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
+      <if test="questionid != null">
+        questionId = #{questionid,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
       </if>
-      <if test="pwd != null">
-        pwd = #{pwd,jdbcType=VARCHAR},
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="accumulate != null">
-        accumulate = #{accumulate,jdbcType=INTEGER},
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
       </if>
       <if test="createat != null">
         createAt = #{createat,jdbcType=TIMESTAMP},
@@ -230,13 +216,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.Userinfo">
-    update userinfo
-    set phone = #{phone,jdbcType=VARCHAR},
-      userName = #{username,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-      accumulate = #{accumulate,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.QuestionComments">
+    update questioncomments
+    set questionId = #{questionid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
       createAt = #{createat,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

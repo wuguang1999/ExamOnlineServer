@@ -3,6 +3,8 @@ package com.volcano.examonlineserv.bean;
 public class QuestionInfo {
     private Integer id;
 
+    private Integer subjectid;
+
     private String description;
 
     private String type;
@@ -35,6 +37,14 @@ public class QuestionInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(Integer subjectid) {
+        this.subjectid = subjectid;
     }
 
     public String getDescription() {

@@ -27,6 +27,7 @@ CREATE TABLE `userinfo`  (
   `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `accumulate` int unsigned DEFAULT NULL,
   `createAt` timestamp(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -35,8 +36,8 @@ CREATE TABLE `userinfo`  (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `userinfo` VALUES (0, '13033333333', 'Volcano Paul', '654321', NULL, now());
-INSERT INTO `userinfo` VALUES (0, '13072860573', 'Jena Dunn', '123456', NULL, '2021-04-08 13:36:05');
+INSERT INTO `userinfo` VALUES (0, '13033333333', 'Volcano Paul', '654321', NULL, NULL, now());
+INSERT INTO `userinfo` VALUES (0, '13072860573', 'Jena Dunn', '123456', NULL, NULL,'2021-04-08 13:36:05');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

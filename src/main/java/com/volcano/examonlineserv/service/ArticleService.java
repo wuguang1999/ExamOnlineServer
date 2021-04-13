@@ -1,9 +1,11 @@
 package com.volcano.examonlineserv.service;
 
 import com.volcano.examonlineserv.bean.ArticleInfo;
+import com.volcano.examonlineserv.bean.CommentsResponse;
 import com.volcano.examonlineserv.bean.Userinfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
+import com.volcano.examonlineserv.mapper.ArticleCommentsMapper;
 import com.volcano.examonlineserv.mapper.ArticleInfoMapper;
 import com.volcano.examonlineserv.mapper.UserinfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class ArticleService {
 
     @Autowired(required = false)
     UserinfoMapper userinfoMapper;
+
+    @Autowired(required = false)
+    ArticleCommentsMapper articleCommentsMapper;
 
 
     public List<ArticleInfo> getArticles() {
@@ -42,5 +47,10 @@ public class ArticleService {
         }else {
             return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
         }
+    }
+
+    public List<CommentsResponse> getArticleComments(int id) {
+        List<CommentsResponse> comments = articleCommentsMapper.getArticleComments(id);
+        return comments;
     }
 }

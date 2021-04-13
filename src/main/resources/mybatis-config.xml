@@ -38,9 +38,11 @@
 
 
 <!--        <table tableName="userinfo" domainObjectName="Userinfo"/>-->
-<!--        <table tableName="questioninfo" domainObjectName="QuestionInfo"/>-->
-        <table tableName="articleinfo" domainObjectName="ArticleInfo"/>
-<!--        <table tableName="comment" domainObjectName="Comment"/>-->
+        <table tableName="questioninfo" domainObjectName="QuestionInfo"/>
+        <table tableName="subjectinfo" domainObjectName="SubjectInfo"/>
+<!--        <table tableName="articleinfo" domainObjectName="ArticleInfo"/>-->
+<!--        <table tableName="articlecomments" domainObjectName="ArticleComments"/>-->
+<!--        <table tableName="questioncomments" domainObjectName="QuestionComments"/>-->
 
 
     </context>

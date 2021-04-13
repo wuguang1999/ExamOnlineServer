@@ -3,8 +3,6 @@ package com.volcano.examonlineserv.mapper;
 import com.volcano.examonlineserv.bean.Userinfo;
 import com.volcano.examonlineserv.bean.UserinfoExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -31,6 +29,6 @@ public interface UserinfoMapper {
 
     int updateByPrimaryKey(Userinfo record);
 
-    @Select("SELECT * FROM userinfo WHERE phone=#{phone}")
-    Userinfo selectUserInfoByPhone(String phone);
+    @Select("SELECT * FROM userinfo WHERE phone = #{userphone,jdbcType=VARCHAR}")
+    Userinfo selectUserInfoByPhone(@Param("userphone") String userphone);
 }
