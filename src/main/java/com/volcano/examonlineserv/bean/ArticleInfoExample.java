@@ -165,73 +165,63 @@ public class ArticleInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneIsNull() {
-            addCriterion("userPhone is null");
+        public Criteria andUseridIsNull() {
+            addCriterion("userId is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneIsNotNull() {
-            addCriterion("userPhone is not null");
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneEqualTo(String value) {
-            addCriterion("userPhone =", value, "userphone");
+        public Criteria andUseridEqualTo(Integer value) {
+            addCriterion("userId =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneNotEqualTo(String value) {
-            addCriterion("userPhone <>", value, "userphone");
+        public Criteria andUseridNotEqualTo(Integer value) {
+            addCriterion("userId <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneGreaterThan(String value) {
-            addCriterion("userPhone >", value, "userphone");
+        public Criteria andUseridGreaterThan(Integer value) {
+            addCriterion("userId >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneGreaterThanOrEqualTo(String value) {
-            addCriterion("userPhone >=", value, "userphone");
+        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
+            addCriterion("userId >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneLessThan(String value) {
-            addCriterion("userPhone <", value, "userphone");
+        public Criteria andUseridLessThan(Integer value) {
+            addCriterion("userId <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneLessThanOrEqualTo(String value) {
-            addCriterion("userPhone <=", value, "userphone");
+        public Criteria andUseridLessThanOrEqualTo(Integer value) {
+            addCriterion("userId <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneLike(String value) {
-            addCriterion("userPhone like", value, "userphone");
+        public Criteria andUseridIn(List<Integer> values) {
+            addCriterion("userId in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneNotLike(String value) {
-            addCriterion("userPhone not like", value, "userphone");
+        public Criteria andUseridNotIn(List<Integer> values) {
+            addCriterion("userId not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneIn(List<String> values) {
-            addCriterion("userPhone in", values, "userphone");
+        public Criteria andUseridBetween(Integer value1, Integer value2) {
+            addCriterion("userId between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUserphoneNotIn(List<String> values) {
-            addCriterion("userPhone not in", values, "userphone");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserphoneBetween(String value1, String value2) {
-            addCriterion("userPhone between", value1, value2, "userphone");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserphoneNotBetween(String value1, String value2) {
-            addCriterion("userPhone not between", value1, value2, "userphone");
+        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
+            addCriterion("userId not between", value1, value2, "userid");
             return (Criteria) this;
         }
 
@@ -445,6 +435,76 @@ public class ArticleInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andFieldIsNull() {
+            addCriterion("field is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIsNotNull() {
+            addCriterion("field is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldEqualTo(String value) {
+            addCriterion("field =", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldNotEqualTo(String value) {
+            addCriterion("field <>", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldGreaterThan(String value) {
+            addCriterion("field >", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldGreaterThanOrEqualTo(String value) {
+            addCriterion("field >=", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLessThan(String value) {
+            addCriterion("field <", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLessThanOrEqualTo(String value) {
+            addCriterion("field <=", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLike(String value) {
+            addCriterion("field like", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldNotLike(String value) {
+            addCriterion("field not like", value, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIn(List<String> values) {
+            addCriterion("field in", values, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldNotIn(List<String> values) {
+            addCriterion("field not in", values, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldBetween(String value1, String value2) {
+            addCriterion("field between", value1, value2, "field");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldNotBetween(String value1, String value2) {
+            addCriterion("field not between", value1, value2, "field");
+            return (Criteria) this;
+        }
+
         public Criteria andImgIsNull() {
             addCriterion("img is null");
             return (Criteria) this;
@@ -512,6 +572,126 @@ public class ArticleInfoExample {
 
         public Criteria andImgNotBetween(String value1, String value2) {
             addCriterion("img not between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIsNull() {
+            addCriterion("commentNums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIsNotNull() {
+            addCriterion("commentNums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsEqualTo(Integer value) {
+            addCriterion("commentNums =", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotEqualTo(Integer value) {
+            addCriterion("commentNums <>", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsGreaterThan(Integer value) {
+            addCriterion("commentNums >", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("commentNums >=", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsLessThan(Integer value) {
+            addCriterion("commentNums <", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsLessThanOrEqualTo(Integer value) {
+            addCriterion("commentNums <=", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIn(List<Integer> values) {
+            addCriterion("commentNums in", values, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotIn(List<Integer> values) {
+            addCriterion("commentNums not in", values, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsBetween(Integer value1, Integer value2) {
+            addCriterion("commentNums between", value1, value2, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("commentNums not between", value1, value2, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsIsNull() {
+            addCriterion("zanNums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsIsNotNull() {
+            addCriterion("zanNums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsEqualTo(Integer value) {
+            addCriterion("zanNums =", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsNotEqualTo(Integer value) {
+            addCriterion("zanNums <>", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsGreaterThan(Integer value) {
+            addCriterion("zanNums >", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("zanNums >=", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsLessThan(Integer value) {
+            addCriterion("zanNums <", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsLessThanOrEqualTo(Integer value) {
+            addCriterion("zanNums <=", value, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsIn(List<Integer> values) {
+            addCriterion("zanNums in", values, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsNotIn(List<Integer> values) {
+            addCriterion("zanNums not in", values, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsBetween(Integer value1, Integer value2) {
+            addCriterion("zanNums between", value1, value2, "zannums");
+            return (Criteria) this;
+        }
+
+        public Criteria andZannumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("zanNums not between", value1, value2, "zannums");
             return (Criteria) this;
         }
 

@@ -2,6 +2,7 @@ package com.volcano.examonlineserv.controller;
 
 import com.volcano.examonlineserv.bean.ArticleInfo;
 import com.volcano.examonlineserv.bean.CommentsResponse;
+import com.volcano.examonlineserv.bean.Userinfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.ArticleService;
@@ -38,9 +39,15 @@ public class ArticleController {
      * 获取论坛热榜文章列表
      * @return
      */
-    @GetMapping("api/v1/articles/hot")
+    @GetMapping("/api/v1/articles/hot")
     public Result getHotArticles() {
-        Result res = new Result();
+        Result res;
+        List<ArticleInfo> list = articleService.getHotArticles();
+        if(list == null || list.isEmpty()) {
+            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }else {
+            res = Result.success(list);
+        }
         return res;
     }
 
@@ -74,11 +81,15 @@ public class ArticleController {
             res = Result.failure(ResultCode.DATA_IS_WRONG);
             return res;
         }
-        String userphone = JwtUtil.validateToken(authorization);
-        String title = articleTmp.getTitle();
-        String desc = articleTmp.getDesc();
-        String img = articleTmp.getImg();
-        res = articleService.uploadArticle(userphone, title, desc, img);
+        Integer id = JwtUtil.validateToken(authorization);
+        ArticleInfo articleInfo = new ArticleInfo();
+        articleInfo.setTitle(articleTmp.getTitle());
+        articleInfo.setDescription(articleTmp.getDescription());
+        if(articleTmp.getImg() != null) {
+            articleInfo.setImg(articleTmp.getImg());
+        }
+        articleInfo.setField(articleTmp.getField());
+        res = articleService.uploadArticle("130", articleInfo);
         return res;
     }
 
@@ -91,8 +102,6 @@ public class ArticleController {
         return new Result();
     }
 
-
-
     @Data
     public static class ArticleTmp{
 
@@ -102,16 +111,21 @@ public class ArticleController {
 
         private String img;
 
+        private String field;
+
         public String getTitle() {
             return title;
         }
 
-        public String getDesc() {
+        public String getDescription() {
             return description;
         }
-
         public String getImg() {
             return img;
+        }
+
+        public String getField() {
+            return field;
         }
     }
 

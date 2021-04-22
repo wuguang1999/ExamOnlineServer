@@ -29,8 +29,6 @@ public class QuestionInfo {
 
     private String optione;
 
-    private Integer isselect;
-
     public Integer getId() {
         return id;
     }
@@ -141,13 +139,5 @@ public class QuestionInfo {
 
     public void setOptione(String optione) {
         this.optione = optione == null ? null : optione.trim();
-    }
-
-    public Integer getIsselect() {
-        return isselect;
-    }
-
-    public void setIsselect(Integer isselect) {
-        this.isselect = isselect;
     }
 }

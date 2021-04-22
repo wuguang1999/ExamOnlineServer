@@ -6,7 +6,7 @@ public class CommentsResponse {
     private String userName;
     private String description;
     private String img;
-    private String avatar;
+    private byte[] avatar;
     private Date createat;
 
     public String getUserName() {
@@ -33,11 +33,11 @@ public class CommentsResponse {
         this.img = img;
     }
 
-    public String getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
 

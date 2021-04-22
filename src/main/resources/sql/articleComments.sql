@@ -43,6 +43,6 @@ INSERT INTO `articlecomments` VALUES (2, 1, 1, 'ambassador', NULL, '2021-04-13 1
 INSERT INTO `articlecomments` VALUES (3, 2, 1, '为人民服务！', NULL, '2021-04-13 10:41:32');
 INSERT INTO `articlecomments` VALUES (4, 3, 3, '天龙八部', NULL, '2021-04-13 10:41:32');
 INSERT INTO `articlecomments` VALUES (5, 3, 1, '剑侠情缘', NULL, '2021-04-13 10:41:32');
-INSERT INTO `articlecomments` VALUES (6, 4, 5, '随意流动！！！', NULL, '2021-04-13 10:41:32');
+INSERT INTO `articlecomments` VALUES (6, 4, 2, '随意流动！！！', NULL, '2021-04-13 10:41:32');
 
 SET FOREIGN_KEY_CHECKS = 1;

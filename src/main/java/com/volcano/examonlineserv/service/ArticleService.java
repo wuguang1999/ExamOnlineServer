@@ -1,8 +1,6 @@
 package com.volcano.examonlineserv.service;
 
-import com.volcano.examonlineserv.bean.ArticleInfo;
-import com.volcano.examonlineserv.bean.CommentsResponse;
-import com.volcano.examonlineserv.bean.Userinfo;
+import com.volcano.examonlineserv.bean.*;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.mapper.ArticleCommentsMapper;
@@ -31,17 +29,14 @@ public class ArticleService {
         return articleInfoMapper.getArticles();
     }
 
-    public Result uploadArticle(String userphone, String title, String desc, String img) {
-        ArticleInfo articleInfo = new ArticleInfo();
-        articleInfo.setUserphone(userphone);
-        articleInfo.setDescription(desc);
-        articleInfo.setTitle(title);
-        if (null != img && !img.equals("")) {
-            articleInfo.setImg(img);
-        }
+    public Result uploadArticle(String userPhone, ArticleInfo articleInfo) {
         Date time = new Date(new java.util.Date().getTime());
         articleInfo.setCreateat(time);
-        articleInfo.setUsername(userinfoMapper.selectUserInfoByPhone(userphone).getUsername());
+        UserinfoExample example = new UserinfoExample();
+        example.createCriteria().andPhoneEqualTo(userPhone);
+        List<Userinfo> userInfos = userinfoMapper.selectByExample(example);
+        articleInfo.setUserid(userInfos.get(0).getId());
+        articleInfo.setUsername(userInfos.get(0).getUsername());
         if(articleInfoMapper.insert(articleInfo) > 0) {
             return Result.success();
         }else {
@@ -50,7 +45,10 @@ public class ArticleService {
     }
 
     public List<CommentsResponse> getArticleComments(int id) {
-        List<CommentsResponse> comments = articleCommentsMapper.getArticleComments(id);
-        return comments;
+        return articleCommentsMapper.getArticleComments(id);
+    }
+
+    public List<ArticleInfo> getHotArticles() {
+        return articleInfoMapper.getHotArticles();
     }
 }

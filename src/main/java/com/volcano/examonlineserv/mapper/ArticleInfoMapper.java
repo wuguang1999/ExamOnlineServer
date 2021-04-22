@@ -31,4 +31,7 @@ public interface ArticleInfoMapper {
 
     @Select("SELECT * FROM articleinfo")
     List<ArticleInfo> getArticles();
+
+    @Select("SELECT * FROM articleinfo ORDER BY (commentNums + zanNums) DESC")
+    List<ArticleInfo> getHotArticles();
 }

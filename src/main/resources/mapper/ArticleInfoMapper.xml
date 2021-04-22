@@ -3,11 +3,14 @@
 <mapper namespace="com.volcano.examonlineserv.mapper.ArticleInfoMapper">
   <resultMap id="BaseResultMap" type="com.volcano.examonlineserv.bean.ArticleInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="field" jdbcType="CHAR" property="field" />
     <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="commentNums" jdbcType="INTEGER" property="commentnums" />
+    <result column="zanNums" jdbcType="INTEGER" property="zannums" />
     <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userPhone, userName, title, description, img, createAt
+    id, userId, userName, title, description, field, img, commentNums, zanNums, createAt
   </sql>
   <select id="selectByExample" parameterType="com.volcano.examonlineserv.bean.ArticleInfoExample" resultMap="BaseResultMap">
     select
@@ -102,11 +105,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.volcano.examonlineserv.bean.ArticleInfo">
-    insert into articleinfo (id, userPhone, userName, 
-      title, description, img, 
+    insert into articleinfo (id, userId, userName, 
+      title, description, field, 
+      img, commentNums, zanNums, 
       createAt)
-    values (#{id,jdbcType=INTEGER}, #{userphone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{field,jdbcType=CHAR}, 
+      #{img,jdbcType=VARCHAR}, #{commentnums,jdbcType=INTEGER}, #{zannums,jdbcType=INTEGER}, 
       #{createat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.volcano.examonlineserv.bean.ArticleInfo">
@@ -115,8 +120,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="userphone != null">
-        userPhone,
+      <if test="userid != null">
+        userId,
       </if>
       <if test="username != null">
         userName,
@@ -127,8 +132,17 @@
       <if test="description != null">
         description,
       </if>
+      <if test="field != null">
+        field,
+      </if>
       <if test="img != null">
         img,
+      </if>
+      <if test="commentnums != null">
+        commentNums,
+      </if>
+      <if test="zannums != null">
+        zanNums,
       </if>
       <if test="createat != null">
         createAt,
@@ -138,8 +152,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="userphone != null">
-        #{userphone,jdbcType=VARCHAR},
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -150,8 +164,17 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
+      <if test="field != null">
+        #{field,jdbcType=CHAR},
+      </if>
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="commentnums != null">
+        #{commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="zannums != null">
+        #{zannums,jdbcType=INTEGER},
       </if>
       <if test="createat != null">
         #{createat,jdbcType=TIMESTAMP},
@@ -170,8 +193,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userphone != null">
-        userPhone = #{record.userphone,jdbcType=VARCHAR},
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=INTEGER},
       </if>
       <if test="record.username != null">
         userName = #{record.username,jdbcType=VARCHAR},
@@ -182,8 +205,17 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
+      <if test="record.field != null">
+        field = #{record.field,jdbcType=CHAR},
+      </if>
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentnums != null">
+        commentNums = #{record.commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="record.zannums != null">
+        zanNums = #{record.zannums,jdbcType=INTEGER},
       </if>
       <if test="record.createat != null">
         createAt = #{record.createat,jdbcType=TIMESTAMP},
@@ -196,11 +228,14 @@
   <update id="updateByExample" parameterType="map">
     update articleinfo
     set id = #{record.id,jdbcType=INTEGER},
-      userPhone = #{record.userphone,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
       userName = #{record.username,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
+      field = #{record.field,jdbcType=CHAR},
       img = #{record.img,jdbcType=VARCHAR},
+      commentNums = #{record.commentnums,jdbcType=INTEGER},
+      zanNums = #{record.zannums,jdbcType=INTEGER},
       createAt = #{record.createat,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,8 +244,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.volcano.examonlineserv.bean.ArticleInfo">
     update articleinfo
     <set>
-      <if test="userphone != null">
-        userPhone = #{userphone,jdbcType=VARCHAR},
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         userName = #{username,jdbcType=VARCHAR},
@@ -221,8 +256,17 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="field != null">
+        field = #{field,jdbcType=CHAR},
+      </if>
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="commentnums != null">
+        commentNums = #{commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="zannums != null">
+        zanNums = #{zannums,jdbcType=INTEGER},
       </if>
       <if test="createat != null">
         createAt = #{createat,jdbcType=TIMESTAMP},
@@ -232,11 +276,14 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.ArticleInfo">
     update articleinfo
-    set userPhone = #{userphone,jdbcType=VARCHAR},
+    set userId = #{userid,jdbcType=INTEGER},
       userName = #{username,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
+      field = #{field,jdbcType=CHAR},
       img = #{img,jdbcType=VARCHAR},
+      commentNums = #{commentnums,jdbcType=INTEGER},
+      zanNums = #{zannums,jdbcType=INTEGER},
       createAt = #{createat,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

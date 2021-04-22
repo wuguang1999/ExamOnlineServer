@@ -1,14 +1,12 @@
 package com.volcano.examonlineserv.controller;
 
 import com.volcano.examonlineserv.bean.CommentsResponse;
-import com.volcano.examonlineserv.bean.QuestionComments;
 import com.volcano.examonlineserv.bean.QuestionInfo;
 import com.volcano.examonlineserv.bean.SubjectInfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.QuestionService;
 import com.volcano.examonlineserv.utils.JwtUtil;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +22,7 @@ public class QuestionController {
      * 获取学科列表
      * @return
      */
-    @GetMapping("api/v1/subjects")
+    @GetMapping("/api/v1/subjects")
     public Result getSubjects() {
         Result res;
         List<SubjectInfo> list = questionService.getSubjects();
@@ -40,7 +38,7 @@ public class QuestionController {
      * 获取试题列表
      * @return
      */
-    @GetMapping("api/v1/questions")
+    @GetMapping("/api/v1/questions")
     public Result getQuestions(@RequestParam Integer subjectId) {
         Result res;
         List<QuestionInfo> list = questionService.getQuestions(subjectId);
@@ -57,7 +55,7 @@ public class QuestionController {
      * @param content
      * @return
      */
-    @GetMapping("api/v1/question")
+    @GetMapping("/api/v1/question")
     public Result searchQuestion(@RequestParam String content) {
         Result res;
         if(content == null || content.equals("")) {
@@ -78,7 +76,7 @@ public class QuestionController {
      * @param id
      * @return
      */
-    @GetMapping("api/v1/question/comment")
+    @GetMapping("/api/v1/question/comment")
     public Result getQuestionComments(@RequestParam int id) {
         Result res;
         List<CommentsResponse> list = questionService.getQuestionComments(id);
@@ -94,7 +92,7 @@ public class QuestionController {
      * 搜索框热词
      * @return
      */
-    @GetMapping("api/v1/question/hotkey")
+    @GetMapping("/api/v1/question/hotkey")
     public Result getQuestionHotKey() {
         Result result = new Result();
         return result;

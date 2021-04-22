@@ -5,7 +5,7 @@ import java.util.Date;
 public class ArticleInfo {
     private Integer id;
 
-    private String userphone;
+    private Integer userid;
 
     private String username;
 
@@ -13,7 +13,13 @@ public class ArticleInfo {
 
     private String description;
 
+    private String field;
+
     private String img;
+
+    private Integer commentnums;
+
+    private Integer zannums;
 
     private Date createat;
 
@@ -25,12 +31,12 @@ public class ArticleInfo {
         this.id = id;
     }
 
-    public String getUserphone() {
-        return userphone;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUserphone(String userphone) {
-        this.userphone = userphone == null ? null : userphone.trim();
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {
@@ -57,12 +63,36 @@ public class ArticleInfo {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field == null ? null : field.trim();
+    }
+
     public String getImg() {
         return img;
     }
 
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
+    }
+
+    public Integer getCommentnums() {
+        return commentnums;
+    }
+
+    public void setCommentnums(Integer commentnums) {
+        this.commentnums = commentnums;
+    }
+
+    public Integer getZannums() {
+        return zannums;
+    }
+
+    public void setZannums(Integer zannums) {
+        this.zannums = zannums;
     }
 
     public Date getCreateat() {

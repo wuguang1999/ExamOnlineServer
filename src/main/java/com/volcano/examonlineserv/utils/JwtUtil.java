@@ -15,17 +15,17 @@ import java.util.Date;
 public class JwtUtil {
 
     public static final long EXPIRATION_TIME = 3600_000_000L;
-    public  static final String SECRET = "EXAM_ONLINE_SECRET";
+    public static final String SECRET = "EXAM_ONLINE_SECRET";
 
     /**
      * 生成jwtToken
      */
-    public static String generateToken(String userPhone) {
+    public static String generateToken(Integer id) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         Date now = new Date(System.currentTimeMillis());
         Date expireTime = new Date(System.currentTimeMillis()+EXPIRATION_TIME);
         JwtBuilder builder = Jwts.builder()
-                .setSubject(userPhone)
+                .setSubject(String.valueOf(id))
                 .setIssuedAt(now)
                 .signWith(signatureAlgorithm, SECRET)
                 .setExpiration(expireTime);
@@ -39,7 +39,7 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static String validateToken(String token) {
+    public static Integer validateToken(String token) {
         if (token != null) {
             Claims claims;
             try {
@@ -50,11 +50,11 @@ public class JwtUtil {
             }catch (Exception e) {
                 claims = null;
             }
-            String userphone = claims.getSubject();
-            if (userphone == null || userphone.isEmpty()) {
+            Integer id = Integer.parseInt(claims.getSubject());
+            if (id == null) {
                 throw new TokenValidationException("Wrong User");
             } else {
-                return userphone;
+                return id;
             }
         } else {
             throw new TokenValidationException("Missing token");

@@ -1063,66 +1063,6 @@ public class QuestionInfoExample {
             addCriterion("optionE not between", value1, value2, "optione");
             return (Criteria) this;
         }
-
-        public Criteria andIsselectIsNull() {
-            addCriterion("isSelect is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectIsNotNull() {
-            addCriterion("isSelect is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectEqualTo(Integer value) {
-            addCriterion("isSelect =", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectNotEqualTo(Integer value) {
-            addCriterion("isSelect <>", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectGreaterThan(Integer value) {
-            addCriterion("isSelect >", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectGreaterThanOrEqualTo(Integer value) {
-            addCriterion("isSelect >=", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectLessThan(Integer value) {
-            addCriterion("isSelect <", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectLessThanOrEqualTo(Integer value) {
-            addCriterion("isSelect <=", value, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectIn(List<Integer> values) {
-            addCriterion("isSelect in", values, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectNotIn(List<Integer> values) {
-            addCriterion("isSelect not in", values, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectBetween(Integer value1, Integer value2) {
-            addCriterion("isSelect between", value1, value2, "isselect");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsselectNotBetween(Integer value1, Integer value2) {
-            addCriterion("isSelect not between", value1, value2, "isselect");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {
