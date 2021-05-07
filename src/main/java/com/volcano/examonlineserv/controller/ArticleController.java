@@ -2,7 +2,6 @@ package com.volcano.examonlineserv.controller;
 
 import com.volcano.examonlineserv.bean.ArticleInfo;
 import com.volcano.examonlineserv.bean.CommentsResponse;
-import com.volcano.examonlineserv.bean.Userinfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.ArticleService;
@@ -56,7 +55,7 @@ public class ArticleController {
      * @param id
      * @return
      */
-    @GetMapping("api/v1/article")
+    @GetMapping("/api/v1/articles/comments")
     public Result getArticleComments(@RequestParam int id) {
         Result res;
         List<CommentsResponse> list = articleService.getArticleComments(id);
@@ -74,7 +73,7 @@ public class ArticleController {
      * @param articleTmp
      * @return
      */
-    @PostMapping("api/v1/article/edit")
+    @PostMapping("/api/v1/articles/edit")
     public Result uploadArticle(@RequestHeader String authorization, @RequestBody ArticleTmp articleTmp) {
         Result res;
         if(null == authorization || null == JwtUtil.validateToken(authorization)) {
@@ -94,12 +93,19 @@ public class ArticleController {
     }
 
     /**
-     * 搜索框热词
+     * 搜索相关内容
      * @return
      */
-    @GetMapping("api/v1/article/hotkey")
-    public Result getArticleHotKey() {
-        return new Result();
+    @GetMapping("/api/v1/articles/search")
+    public Result searchArticle(@RequestParam String content) {
+        Result res;
+        List<ArticleInfo> list = articleService.searchArticle(content);
+        if(list == null || list.isEmpty()) {
+            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }else {
+            res = Result.success(list);
+        }
+        return res;
     }
 
     @Data
@@ -120,6 +126,7 @@ public class ArticleController {
         public String getDescription() {
             return description;
         }
+
         public String getImg() {
             return img;
         }

@@ -1,16 +1,17 @@
 package com.volcano.examonlineserv.service;
 
 import com.volcano.examonlineserv.bean.CommentsResponse;
-import com.volcano.examonlineserv.bean.QuestionComments;
 import com.volcano.examonlineserv.bean.QuestionInfo;
+import com.volcano.examonlineserv.bean.QuestionInfoExample;
 import com.volcano.examonlineserv.bean.SubjectInfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
-import com.volcano.examonlineserv.mapper.QuestionCommentsMapper;
+import com.volcano.examonlineserv.mapper.CommentsMapper;
 import com.volcano.examonlineserv.mapper.QuestionInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,16 +21,10 @@ public class QuestionService {
     QuestionInfoMapper questionInfoMapper;
 
     @Autowired(required = false)
-    QuestionCommentsMapper questionCommentsMapper;
+    CommentsMapper questionCommentsMapper;
 
-    public List<QuestionInfo> getRandomQuestions(Integer subjectId, String num) {
-        int count = questionInfoMapper.countQuestions(subjectId);
-        List<QuestionInfo> records;
-        if(Integer.parseInt(num) > count) {
-            return null;
-        }
-        records = questionInfoMapper.getRandomQuestions(subjectId, Integer.parseInt(num));
-        return records;
+    public List<SubjectInfo> getSubjects() {
+        return questionInfoMapper.getSubjects();
     }
 
     public List<QuestionInfo> getQuestions(Integer subjectId) {
@@ -43,8 +38,18 @@ public class QuestionService {
     }
 
     public List<CommentsResponse> getQuestionComments(int id) {
-        List<CommentsResponse> comments = questionCommentsMapper.getQuestionComments(id);
+        List<CommentsResponse> comments = questionCommentsMapper.getQuestionComments("试题",id);
         return comments;
+    }
+
+    public List<QuestionInfo> getRandomQuestions(Integer subjectId, String num) {
+        int count = questionInfoMapper.countQuestions(subjectId);
+        List<QuestionInfo> records;
+        if(Integer.parseInt(num) > count) {
+            return null;
+        }
+        records = questionInfoMapper.getRandomQuestions(subjectId, Integer.parseInt(num));
+        return records;
     }
 
     public Result uploadQuestion(QuestionInfo questionInfo) {
@@ -55,7 +60,7 @@ public class QuestionService {
         }
     }
 
-    public List<SubjectInfo> getSubjects() {
-        return questionInfoMapper.getSubjects();
+    public List<QuestionInfo> getCommendQuestions(Integer subjectId, String keywords) {
+        return questionInfoMapper.getCommendQuestions(subjectId, "%" + keywords + "%");
     }
 }

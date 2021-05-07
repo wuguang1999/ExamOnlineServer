@@ -6,7 +6,7 @@
     <result column="subjectId" jdbcType="INTEGER" property="subjectid" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="type" jdbcType="CHAR" property="type" />
-    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
     <result column="level" jdbcType="CHAR" property="level" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="analysis" jdbcType="VARCHAR" property="analysis" />
@@ -16,6 +16,10 @@
     <result column="optionC" jdbcType="VARCHAR" property="optionc" />
     <result column="optionD" jdbcType="VARCHAR" property="optiond" />
     <result column="optionE" jdbcType="VARCHAR" property="optione" />
+    <result column="commentNums" jdbcType="INTEGER" property="commentnums" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.volcano.examonlineserv.bean.QuestionInfo">
+    <result column="img" jdbcType="LONGVARBINARY" property="img" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,9 +80,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, subjectId, description, type, img, level, source, analysis, correctAnswer, optionA, 
-    optionB, optionC, optionD, optionE
+    id, subjectId, description, type, keywords, level, source, analysis, correctAnswer, 
+    optionA, optionB, optionC, optionD, optionE, commentNums
   </sql>
+  <sql id="Blob_Column_List">
+    img
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questioninfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -93,9 +116,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from questioninfo
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -111,15 +136,17 @@
   </delete>
   <insert id="insert" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
     insert into questioninfo (id, subjectId, description, 
-      type, img, level, source, 
+      type, keywords, level, source, 
       analysis, correctAnswer, optionA, 
       optionB, optionC, optionD, 
-      optionE)
+      optionE, commentNums, img
+      )
     values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
-      #{type,jdbcType=CHAR}, #{img,jdbcType=VARCHAR}, #{level,jdbcType=CHAR}, #{source,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{keywords,jdbcType=VARCHAR}, #{level,jdbcType=CHAR}, #{source,jdbcType=VARCHAR}, 
       #{analysis,jdbcType=VARCHAR}, #{correctanswer,jdbcType=VARCHAR}, #{optiona,jdbcType=VARCHAR}, 
       #{optionb,jdbcType=VARCHAR}, #{optionc,jdbcType=VARCHAR}, #{optiond,jdbcType=VARCHAR}, 
-      #{optione,jdbcType=VARCHAR})
+      #{optione,jdbcType=VARCHAR}, #{commentnums,jdbcType=INTEGER}, #{img,jdbcType=LONGVARBINARY}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
     insert into questioninfo
@@ -136,8 +163,8 @@
       <if test="type != null">
         type,
       </if>
-      <if test="img != null">
-        img,
+      <if test="keywords != null">
+        keywords,
       </if>
       <if test="level != null">
         level,
@@ -166,6 +193,12 @@
       <if test="optione != null">
         optionE,
       </if>
+      <if test="commentnums != null">
+        commentNums,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -180,8 +213,8 @@
       <if test="type != null">
         #{type,jdbcType=CHAR},
       </if>
-      <if test="img != null">
-        #{img,jdbcType=VARCHAR},
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
       </if>
       <if test="level != null">
         #{level,jdbcType=CHAR},
@@ -210,6 +243,12 @@
       <if test="optione != null">
         #{optione,jdbcType=VARCHAR},
       </if>
+      <if test="commentnums != null">
+        #{commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=LONGVARBINARY},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.volcano.examonlineserv.bean.QuestionInfoExample" resultType="java.lang.Long">
@@ -233,8 +272,8 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=CHAR},
       </if>
-      <if test="record.img != null">
-        img = #{record.img,jdbcType=VARCHAR},
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=VARCHAR},
       </if>
       <if test="record.level != null">
         level = #{record.level,jdbcType=CHAR},
@@ -263,7 +302,35 @@
       <if test="record.optione != null">
         optionE = #{record.optione,jdbcType=VARCHAR},
       </if>
+      <if test="record.commentnums != null">
+        commentNums = #{record.commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=LONGVARBINARY},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update questioninfo
+    set id = #{record.id,jdbcType=INTEGER},
+      subjectId = #{record.subjectid,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=CHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=CHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      analysis = #{record.analysis,jdbcType=VARCHAR},
+      correctAnswer = #{record.correctanswer,jdbcType=VARCHAR},
+      optionA = #{record.optiona,jdbcType=VARCHAR},
+      optionB = #{record.optionb,jdbcType=VARCHAR},
+      optionC = #{record.optionc,jdbcType=VARCHAR},
+      optionD = #{record.optiond,jdbcType=VARCHAR},
+      optionE = #{record.optione,jdbcType=VARCHAR},
+      commentNums = #{record.commentnums,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=LONGVARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -274,7 +341,7 @@
       subjectId = #{record.subjectid,jdbcType=INTEGER},
       description = #{record.description,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=CHAR},
-      img = #{record.img,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
       level = #{record.level,jdbcType=CHAR},
       source = #{record.source,jdbcType=VARCHAR},
       analysis = #{record.analysis,jdbcType=VARCHAR},
@@ -283,7 +350,8 @@
       optionB = #{record.optionb,jdbcType=VARCHAR},
       optionC = #{record.optionc,jdbcType=VARCHAR},
       optionD = #{record.optiond,jdbcType=VARCHAR},
-      optionE = #{record.optione,jdbcType=VARCHAR}
+      optionE = #{record.optione,jdbcType=VARCHAR},
+      commentNums = #{record.commentnums,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -300,8 +368,8 @@
       <if test="type != null">
         type = #{type,jdbcType=CHAR},
       </if>
-      <if test="img != null">
-        img = #{img,jdbcType=VARCHAR},
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=CHAR},
@@ -330,15 +398,21 @@
       <if test="optione != null">
         optionE = #{optione,jdbcType=VARCHAR},
       </if>
+      <if test="commentnums != null">
+        commentNums = #{commentnums,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=LONGVARBINARY},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
     update questioninfo
     set subjectId = #{subjectid,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       type = #{type,jdbcType=CHAR},
-      img = #{img,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
       level = #{level,jdbcType=CHAR},
       source = #{source,jdbcType=VARCHAR},
       analysis = #{analysis,jdbcType=VARCHAR},
@@ -347,7 +421,27 @@
       optionB = #{optionb,jdbcType=VARCHAR},
       optionC = #{optionc,jdbcType=VARCHAR},
       optionD = #{optiond,jdbcType=VARCHAR},
-      optionE = #{optione,jdbcType=VARCHAR}
+      optionE = #{optione,jdbcType=VARCHAR},
+      commentNums = #{commentnums,jdbcType=INTEGER},
+      img = #{img,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.volcano.examonlineserv.bean.QuestionInfo">
+    update questioninfo
+    set subjectId = #{subjectid,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      level = #{level,jdbcType=CHAR},
+      source = #{source,jdbcType=VARCHAR},
+      analysis = #{analysis,jdbcType=VARCHAR},
+      correctAnswer = #{correctanswer,jdbcType=VARCHAR},
+      optionA = #{optiona,jdbcType=VARCHAR},
+      optionB = #{optionb,jdbcType=VARCHAR},
+      optionC = #{optionc,jdbcType=VARCHAR},
+      optionD = #{optiond,jdbcType=VARCHAR},
+      optionE = #{optione,jdbcType=VARCHAR},
+      commentNums = #{commentnums,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

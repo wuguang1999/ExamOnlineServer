@@ -7,6 +7,7 @@ public class CommentsResponse {
     private String description;
     private String img;
     private byte[] avatar;
+    private Integer zan;
     private Date createat;
 
     public String getUserName() {
@@ -39,6 +40,14 @@ public class CommentsResponse {
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getZan() {
+        return zan;
+    }
+
+    public void setZan(Integer zan) {
+        this.zan = zan;
     }
 
     public Date getCreateat() {

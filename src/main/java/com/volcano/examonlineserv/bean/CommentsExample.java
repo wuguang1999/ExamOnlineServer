@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class QuestionCommentsExample {
+public class CommentsExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public QuestionCommentsExample() {
+    public CommentsExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -165,63 +165,63 @@ public class QuestionCommentsExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidIsNull() {
-            addCriterion("questionId is null");
+        public Criteria andTargetidIsNull() {
+            addCriterion("targetId is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidIsNotNull() {
-            addCriterion("questionId is not null");
+        public Criteria andTargetidIsNotNull() {
+            addCriterion("targetId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidEqualTo(Integer value) {
-            addCriterion("questionId =", value, "questionid");
+        public Criteria andTargetidEqualTo(Integer value) {
+            addCriterion("targetId =", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotEqualTo(Integer value) {
-            addCriterion("questionId <>", value, "questionid");
+        public Criteria andTargetidNotEqualTo(Integer value) {
+            addCriterion("targetId <>", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidGreaterThan(Integer value) {
-            addCriterion("questionId >", value, "questionid");
+        public Criteria andTargetidGreaterThan(Integer value) {
+            addCriterion("targetId >", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("questionId >=", value, "questionid");
+        public Criteria andTargetidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("targetId >=", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidLessThan(Integer value) {
-            addCriterion("questionId <", value, "questionid");
+        public Criteria andTargetidLessThan(Integer value) {
+            addCriterion("targetId <", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidLessThanOrEqualTo(Integer value) {
-            addCriterion("questionId <=", value, "questionid");
+        public Criteria andTargetidLessThanOrEqualTo(Integer value) {
+            addCriterion("targetId <=", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidIn(List<Integer> values) {
-            addCriterion("questionId in", values, "questionid");
+        public Criteria andTargetidIn(List<Integer> values) {
+            addCriterion("targetId in", values, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotIn(List<Integer> values) {
-            addCriterion("questionId not in", values, "questionid");
+        public Criteria andTargetidNotIn(List<Integer> values) {
+            addCriterion("targetId not in", values, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidBetween(Integer value1, Integer value2) {
-            addCriterion("questionId between", value1, value2, "questionid");
+        public Criteria andTargetidBetween(Integer value1, Integer value2) {
+            addCriterion("targetId between", value1, value2, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotBetween(Integer value1, Integer value2) {
-            addCriterion("questionId not between", value1, value2, "questionid");
+        public Criteria andTargetidNotBetween(Integer value1, Integer value2) {
+            addCriterion("targetId not between", value1, value2, "targetid");
             return (Criteria) this;
         }
 
@@ -282,6 +282,76 @@ public class QuestionCommentsExample {
 
         public Criteria andUseridNotBetween(Integer value1, Integer value2) {
             addCriterion("userId not between", value1, value2, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
@@ -355,73 +425,63 @@ public class QuestionCommentsExample {
             return (Criteria) this;
         }
 
-        public Criteria andImgIsNull() {
-            addCriterion("img is null");
+        public Criteria andZanIsNull() {
+            addCriterion("zan is null");
             return (Criteria) this;
         }
 
-        public Criteria andImgIsNotNull() {
-            addCriterion("img is not null");
+        public Criteria andZanIsNotNull() {
+            addCriterion("zan is not null");
             return (Criteria) this;
         }
 
-        public Criteria andImgEqualTo(String value) {
-            addCriterion("img =", value, "img");
+        public Criteria andZanEqualTo(Integer value) {
+            addCriterion("zan =", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotEqualTo(String value) {
-            addCriterion("img <>", value, "img");
+        public Criteria andZanNotEqualTo(Integer value) {
+            addCriterion("zan <>", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgGreaterThan(String value) {
-            addCriterion("img >", value, "img");
+        public Criteria andZanGreaterThan(Integer value) {
+            addCriterion("zan >", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgGreaterThanOrEqualTo(String value) {
-            addCriterion("img >=", value, "img");
+        public Criteria andZanGreaterThanOrEqualTo(Integer value) {
+            addCriterion("zan >=", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgLessThan(String value) {
-            addCriterion("img <", value, "img");
+        public Criteria andZanLessThan(Integer value) {
+            addCriterion("zan <", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgLessThanOrEqualTo(String value) {
-            addCriterion("img <=", value, "img");
+        public Criteria andZanLessThanOrEqualTo(Integer value) {
+            addCriterion("zan <=", value, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgLike(String value) {
-            addCriterion("img like", value, "img");
+        public Criteria andZanIn(List<Integer> values) {
+            addCriterion("zan in", values, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotLike(String value) {
-            addCriterion("img not like", value, "img");
+        public Criteria andZanNotIn(List<Integer> values) {
+            addCriterion("zan not in", values, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgIn(List<String> values) {
-            addCriterion("img in", values, "img");
+        public Criteria andZanBetween(Integer value1, Integer value2) {
+            addCriterion("zan between", value1, value2, "zan");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotIn(List<String> values) {
-            addCriterion("img not in", values, "img");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgBetween(String value1, String value2) {
-            addCriterion("img between", value1, value2, "img");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgNotBetween(String value1, String value2) {
-            addCriterion("img not between", value1, value2, "img");
+        public Criteria andZanNotBetween(Integer value1, Integer value2) {
+            addCriterion("zan not between", value1, value2, "zan");
             return (Criteria) this;
         }
 

@@ -364,73 +364,73 @@ public class QuestionInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andImgIsNull() {
-            addCriterion("img is null");
+        public Criteria andKeywordsIsNull() {
+            addCriterion("keywords is null");
             return (Criteria) this;
         }
 
-        public Criteria andImgIsNotNull() {
-            addCriterion("img is not null");
+        public Criteria andKeywordsIsNotNull() {
+            addCriterion("keywords is not null");
             return (Criteria) this;
         }
 
-        public Criteria andImgEqualTo(String value) {
-            addCriterion("img =", value, "img");
+        public Criteria andKeywordsEqualTo(String value) {
+            addCriterion("keywords =", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotEqualTo(String value) {
-            addCriterion("img <>", value, "img");
+        public Criteria andKeywordsNotEqualTo(String value) {
+            addCriterion("keywords <>", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgGreaterThan(String value) {
-            addCriterion("img >", value, "img");
+        public Criteria andKeywordsGreaterThan(String value) {
+            addCriterion("keywords >", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgGreaterThanOrEqualTo(String value) {
-            addCriterion("img >=", value, "img");
+        public Criteria andKeywordsGreaterThanOrEqualTo(String value) {
+            addCriterion("keywords >=", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgLessThan(String value) {
-            addCriterion("img <", value, "img");
+        public Criteria andKeywordsLessThan(String value) {
+            addCriterion("keywords <", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgLessThanOrEqualTo(String value) {
-            addCriterion("img <=", value, "img");
+        public Criteria andKeywordsLessThanOrEqualTo(String value) {
+            addCriterion("keywords <=", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgLike(String value) {
-            addCriterion("img like", value, "img");
+        public Criteria andKeywordsLike(String value) {
+            addCriterion("keywords like", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotLike(String value) {
-            addCriterion("img not like", value, "img");
+        public Criteria andKeywordsNotLike(String value) {
+            addCriterion("keywords not like", value, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgIn(List<String> values) {
-            addCriterion("img in", values, "img");
+        public Criteria andKeywordsIn(List<String> values) {
+            addCriterion("keywords in", values, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotIn(List<String> values) {
-            addCriterion("img not in", values, "img");
+        public Criteria andKeywordsNotIn(List<String> values) {
+            addCriterion("keywords not in", values, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgBetween(String value1, String value2) {
-            addCriterion("img between", value1, value2, "img");
+        public Criteria andKeywordsBetween(String value1, String value2) {
+            addCriterion("keywords between", value1, value2, "keywords");
             return (Criteria) this;
         }
 
-        public Criteria andImgNotBetween(String value1, String value2) {
-            addCriterion("img not between", value1, value2, "img");
+        public Criteria andKeywordsNotBetween(String value1, String value2) {
+            addCriterion("keywords not between", value1, value2, "keywords");
             return (Criteria) this;
         }
 
@@ -1061,6 +1061,66 @@ public class QuestionInfoExample {
 
         public Criteria andOptioneNotBetween(String value1, String value2) {
             addCriterion("optionE not between", value1, value2, "optione");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIsNull() {
+            addCriterion("commentNums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIsNotNull() {
+            addCriterion("commentNums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsEqualTo(Integer value) {
+            addCriterion("commentNums =", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotEqualTo(Integer value) {
+            addCriterion("commentNums <>", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsGreaterThan(Integer value) {
+            addCriterion("commentNums >", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("commentNums >=", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsLessThan(Integer value) {
+            addCriterion("commentNums <", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsLessThanOrEqualTo(Integer value) {
+            addCriterion("commentNums <=", value, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsIn(List<Integer> values) {
+            addCriterion("commentNums in", values, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotIn(List<Integer> values) {
+            addCriterion("commentNums not in", values, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsBetween(Integer value1, Integer value2) {
+            addCriterion("commentNums between", value1, value2, "commentnums");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentnumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("commentNums not between", value1, value2, "commentnums");
             return (Criteria) this;
         }
     }

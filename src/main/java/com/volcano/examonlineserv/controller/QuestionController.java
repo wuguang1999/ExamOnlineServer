@@ -22,7 +22,7 @@ public class QuestionController {
      * 获取学科列表
      * @return
      */
-    @GetMapping("/api/v1/subjects")
+    @GetMapping("/api/v1/questions/subject")
     public Result getSubjects() {
         Result res;
         List<SubjectInfo> list = questionService.getSubjects();
@@ -55,7 +55,7 @@ public class QuestionController {
      * @param content
      * @return
      */
-    @GetMapping("/api/v1/question")
+    @GetMapping("/api/v1/questions/search")
     public Result searchQuestion(@RequestParam String content) {
         Result res;
         if(content == null || content.equals("")) {
@@ -76,7 +76,7 @@ public class QuestionController {
      * @param id
      * @return
      */
-    @GetMapping("/api/v1/question/comment")
+    @GetMapping("/api/v1/questions/comments")
     public Result getQuestionComments(@RequestParam int id) {
         Result res;
         List<CommentsResponse> list = questionService.getQuestionComments(id);
@@ -89,23 +89,12 @@ public class QuestionController {
     }
 
     /**
-     * 搜索框热词
-     * @return
-     */
-    @GetMapping("/api/v1/question/hotkey")
-    public Result getQuestionHotKey() {
-        Result result = new Result();
-        return result;
-    }
-
-
-    /**
      * 随机抽取num道试题组成试卷
      * @param num
      * @return Result<List<QuestionInfo>>
      *
      */
-    @GetMapping("/api/v1/question/random")
+    @GetMapping("/api/v1/questions/random")
     public Result getRandomQuestions(@RequestParam Integer subjectId , @RequestParam String num) {
         Result res;
         if(null == num || num.equals("")) {
@@ -125,7 +114,7 @@ public class QuestionController {
      * 填写表单上传试题
      * @return
      */
-    @PostMapping("/api/v1/question/edit")
+    @PostMapping("/api/v1/questions/edit")
     public Result uploadQuestion(@RequestHeader String authorization, @RequestBody QuestionInfo questionInfo) {
         Result res;
         if(null == authorization || null == JwtUtil.validateToken(authorization)) {
@@ -136,5 +125,15 @@ public class QuestionController {
         return res;
     }
 
-
+    @GetMapping("/api/v1/questions/commend")
+    public Result getCommendQuestions(@RequestParam Integer subjectId ,@RequestParam String keywords) {
+        Result res;
+        List<QuestionInfo> list = questionService.getCommendQuestions(subjectId, keywords);
+        if(list == null || list.isEmpty()) {
+            res = Result.failure(ResultCode.RESULE_DATA_NONE);
+        }else {
+            res = Result.success(list);
+        }
+        return res;
+    }
 }

@@ -19,15 +19,21 @@ public interface QuestionInfoMapper {
 
     int insertSelective(QuestionInfo record);
 
+    List<QuestionInfo> selectByExampleWithBLOBs(QuestionInfoExample example);
+
     List<QuestionInfo> selectByExample(QuestionInfoExample example);
 
     QuestionInfo selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") QuestionInfo record, @Param("example") QuestionInfoExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") QuestionInfo record, @Param("example") QuestionInfoExample example);
+
     int updateByExample(@Param("record") QuestionInfo record, @Param("example") QuestionInfoExample example);
 
     int updateByPrimaryKeySelective(QuestionInfo record);
+
+    int updateByPrimaryKeyWithBLOBs(QuestionInfo record);
 
     int updateByPrimaryKey(QuestionInfo record);
 
@@ -51,4 +57,7 @@ public interface QuestionInfoMapper {
 
     @Select("SELECT * FROM subjectinfo")
     List<SubjectInfo> getSubjects();
+
+    @Select("SELECT * FROM questioninfo WHERE subjectId = #{subjectId,jdbcType=INTEGER} AND description LIKE #{keywords,jdbcType=VARCHAR}")
+    List<QuestionInfo> getCommendQuestions(@Param("subjectId") Integer subjectId, @Param("keywords") String keywords);
 }

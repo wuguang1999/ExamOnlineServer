@@ -26,14 +26,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/api/v1/userinfo/id")
-    public Result getUserinfoById(@RequestParam String param) {
+    public Result getUserinfoById(@RequestParam Integer param) {
         Result res;
-        Integer id = Integer.parseInt(param);
-        if(null == id) {
+        if(null == param) {
             res = Result.failure(ResultCode.PARAM_IS_INVALID);
             return res;
         }
-        Userinfo userinfo = userService.getUserInfoById(id);
+        Userinfo userinfo = userService.getUserInfoById(param);
         if(userinfo == null) {
             res = Result.failure(ResultCode.USER_NOT_EXIST);
         }else {
@@ -118,6 +117,7 @@ public class UserController {
             String token = JwtUtil.generateToken(code[1]);
             HashMap<String, String> map = new HashMap<>();
             map.put("token", token);
+            map.put("id", String.valueOf(code[1]));
             res = Result.success(map);
         }
         return res;

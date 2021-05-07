@@ -9,7 +9,7 @@ public class QuestionInfo {
 
     private String type;
 
-    private String img;
+    private String keywords;
 
     private String level;
 
@@ -28,6 +28,10 @@ public class QuestionInfo {
     private String optiond;
 
     private String optione;
+
+    private Integer commentnums;
+
+    private byte[] img;
 
     public Integer getId() {
         return id;
@@ -61,12 +65,12 @@ public class QuestionInfo {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getImg() {
-        return img;
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setImg(String img) {
-        this.img = img == null ? null : img.trim();
+    public void setKeywords(String keywords) {
+        this.keywords = keywords == null ? null : keywords.trim();
     }
 
     public String getLevel() {
@@ -139,5 +143,21 @@ public class QuestionInfo {
 
     public void setOptione(String optione) {
         this.optione = optione == null ? null : optione.trim();
+    }
+
+    public Integer getCommentnums() {
+        return commentnums;
+    }
+
+    public void setCommentnums(Integer commentnums) {
+        this.commentnums = commentnums;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 }

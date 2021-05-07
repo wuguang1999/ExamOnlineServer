@@ -3,8 +3,8 @@ package com.volcano.examonlineserv.service;
 import com.volcano.examonlineserv.bean.*;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
-import com.volcano.examonlineserv.mapper.ArticleCommentsMapper;
 import com.volcano.examonlineserv.mapper.ArticleInfoMapper;
+import com.volcano.examonlineserv.mapper.CommentsMapper;
 import com.volcano.examonlineserv.mapper.UserinfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,21 +22,27 @@ public class ArticleService {
     UserinfoMapper userinfoMapper;
 
     @Autowired(required = false)
-    ArticleCommentsMapper articleCommentsMapper;
+    CommentsMapper articleCommentsMapper;
 
 
     public List<ArticleInfo> getArticles() {
         return articleInfoMapper.getArticles();
     }
 
+    public List<ArticleInfo> getHotArticles() {
+        return articleInfoMapper.getHotArticles();
+    }
+
+    public List<CommentsResponse> getArticleComments(int id) {
+        return articleCommentsMapper.getArticleComments("文章",id);
+    }
+
     public Result uploadArticle(String userPhone, ArticleInfo articleInfo) {
         Date time = new Date(new java.util.Date().getTime());
         articleInfo.setCreateat(time);
-        UserinfoExample example = new UserinfoExample();
-        example.createCriteria().andPhoneEqualTo(userPhone);
-        List<Userinfo> userInfos = userinfoMapper.selectByExample(example);
-        articleInfo.setUserid(userInfos.get(0).getId());
-        articleInfo.setUsername(userInfos.get(0).getUsername());
+        Userinfo userinfo = userinfoMapper.selectByPhone(userPhone);
+        articleInfo.setUserid(userinfo.getId());
+        articleInfo.setUsername(userinfo.getUsername());
         if(articleInfoMapper.insert(articleInfo) > 0) {
             return Result.success();
         }else {
@@ -44,11 +50,7 @@ public class ArticleService {
         }
     }
 
-    public List<CommentsResponse> getArticleComments(int id) {
-        return articleCommentsMapper.getArticleComments(id);
-    }
-
-    public List<ArticleInfo> getHotArticles() {
-        return articleInfoMapper.getHotArticles();
+    public List<ArticleInfo> searchArticle(String content) {
+        return articleInfoMapper.searchArticles("%" + content + "%");
     }
 }

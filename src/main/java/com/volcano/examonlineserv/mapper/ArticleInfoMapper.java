@@ -34,4 +34,8 @@ public interface ArticleInfoMapper {
 
     @Select("SELECT * FROM articleinfo ORDER BY (commentNums + zanNums) DESC")
     List<ArticleInfo> getHotArticles();
+
+    @Select("SELECT * FROM articleinfo" +
+            "WHERE description LIKE #{content,jdbcType=VARCHAR} OR title LIKE #{content,jdbcType=VARCHAR}")
+    List<ArticleInfo> searchArticles(@Param("content") String content);
 }

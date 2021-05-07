@@ -2,18 +2,22 @@ package com.volcano.examonlineserv.bean;
 
 import java.util.Date;
 
-public class QuestionComments {
+public class Comments {
     private Integer id;
 
-    private Integer questionid;
+    private Integer targetid;
 
     private Integer userid;
 
+    private String type;
+
     private String description;
 
-    private String img;
+    private Integer zan;
 
     private Date createat;
+
+    private byte[] img;
 
     public Integer getId() {
         return id;
@@ -23,12 +27,12 @@ public class QuestionComments {
         this.id = id;
     }
 
-    public Integer getQuestionid() {
-        return questionid;
+    public Integer getTargetid() {
+        return targetid;
     }
 
-    public void setQuestionid(Integer questionid) {
-        this.questionid = questionid;
+    public void setTargetid(Integer targetid) {
+        this.targetid = targetid;
     }
 
     public Integer getUserid() {
@@ -39,6 +43,14 @@ public class QuestionComments {
         this.userid = userid;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
     public String getDescription() {
         return description;
     }
@@ -47,12 +59,12 @@ public class QuestionComments {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getImg() {
-        return img;
+    public Integer getZan() {
+        return zan;
     }
 
-    public void setImg(String img) {
-        this.img = img == null ? null : img.trim();
+    public void setZan(Integer zan) {
+        this.zan = zan;
     }
 
     public Date getCreateat() {
@@ -61,5 +73,13 @@ public class QuestionComments {
 
     public void setCreateat(Date createat) {
         this.createat = createat;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 }
