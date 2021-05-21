@@ -99,6 +99,15 @@ public class ArticleController {
         return res;
     }
 
+    @PostMapping("/api/v1/articles/increaseZan")
+    public Result increaseArticleZan(@RequestParam Integer articleId) {
+        return articleService.increaseArticleZan(articleId);
+    }
+
+    @PostMapping("/api/v1/articles/decreaseZan")
+    public Result decreaseArticleZan(@RequestParam Integer articleId) {
+        return articleService.decreaseArticleZan(articleId);
+    }
     @Data
     public static class ArticleTmp{
 

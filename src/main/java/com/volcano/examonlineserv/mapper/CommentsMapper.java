@@ -37,12 +37,12 @@ public interface CommentsMapper {
 
     int updateByPrimaryKey(Comments record);
 
-    @Select("SELECT userName,description,img,avatar,zan,comments.createAt " +
+    @Select("SELECT comments.id,userName,description,img,avatar,zan,comments.createAt " +
             "FROM userinfo, comments " +
             "WHERE type = #{type,jdbcType=VARCHAR} AND userinfo.id = comments.userId AND comments.targetId = #{id,jdbcType=INTEGER}")
     List<CommentsResponse> getArticleComments(@Param("type") String type, @Param("id") Integer id);
 
-    @Select("SELECT userName,description,img,avatar,zan,comments.createAt " +
+    @Select("SELECT comments.id,userName,description,img,avatar,zan,comments.createAt " +
             "FROM userinfo, comments " +
             "WHERE type = #{type,jdbcType=VARCHAR} AND userinfo.id = comments.userId AND comments.targetId = #{id,jdbcType=INTEGER}")
     List<CommentsResponse> getQuestionComments(@Param("type") String type, @Param("id") Integer id);

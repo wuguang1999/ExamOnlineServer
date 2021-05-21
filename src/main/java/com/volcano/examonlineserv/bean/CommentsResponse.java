@@ -3,12 +3,21 @@ package com.volcano.examonlineserv.bean;
 import java.util.Date;
 
 public class CommentsResponse {
+    private Integer id;
     private String userName;
     private String description;
     private String img;
-    private byte[] avatar;
     private Integer zan;
+    private byte[] avatar;
     private Date createat;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;

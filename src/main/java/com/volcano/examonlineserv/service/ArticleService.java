@@ -65,4 +65,24 @@ public class ArticleService {
             return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
         }
     }
+
+    public Result increaseArticleZan(Integer articleId) {
+        ArticleInfo articleInfo = articleInfoMapper.selectByPrimaryKey(articleId);
+        articleInfo.setZannums(articleInfo.getZannums() + 1);
+        if(articleInfoMapper.updateByPrimaryKeySelective(articleInfo) > 0) {
+            return Result.success();
+        }else {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }
+    }
+
+    public Result decreaseArticleZan(Integer articleId) {
+        ArticleInfo articleInfo = articleInfoMapper.selectByPrimaryKey(articleId);
+        articleInfo.setZannums(articleInfo.getZannums() - 1);
+        if(articleInfoMapper.updateByPrimaryKeySelective(articleInfo) > 0) {
+            return Result.success();
+        }else {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }
+    }
 }
