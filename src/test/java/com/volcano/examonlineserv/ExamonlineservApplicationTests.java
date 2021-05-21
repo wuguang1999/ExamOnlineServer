@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootTest
@@ -73,5 +75,11 @@ class ExamonlineservApplicationTests {
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void strtotime() {
+        String str = "2021-05-21T16:31:04.000+00:00";
+        System.out.println();
     }
 }

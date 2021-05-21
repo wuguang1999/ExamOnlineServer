@@ -100,8 +100,10 @@ public class QuestionController {
         questionInfo.setKeywords(uploadBean.keywords); questionInfo.setDescription(uploadBean.description);
         questionInfo.setType(uploadBean.type); questionInfo.setImg(null);
         questionInfo.setOptiona(uploadBean.optiona); questionInfo.setOptionb(uploadBean.optionb);
-        questionInfo.setOptionc(uploadBean.optionc); questionInfo.setOptiond(uploadBean.optiond);
-        questionInfo.setOptione(uploadBean.optione); questionInfo.setCorrectanswer(uploadBean.correctanswer);
+        if(!uploadBean.optionc.isEmpty()) questionInfo.setOptionc(uploadBean.optionc);
+        if(!uploadBean.optiond.isEmpty()) questionInfo.setOptiond(uploadBean.optiond);
+        if(!uploadBean.optione.isEmpty()) questionInfo.setOptione(uploadBean.optione);
+        questionInfo.setCorrectanswer(uploadBean.correctanswer);
         questionInfo.setAnalysis(uploadBean.analysis);
         res = questionService.uploadQuestion(questionInfo, uploadBean.subjectName);
         return res;

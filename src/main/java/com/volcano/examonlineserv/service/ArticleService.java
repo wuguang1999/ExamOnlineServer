@@ -53,4 +53,16 @@ public class ArticleService {
     public List<ArticleInfo> searchArticle(String content) {
         return articleInfoMapper.searchArticles("%" + content + "%");
     }
+
+    public Result uploadArticleComment(Integer userId, Comments comments) {
+        Date time = new Date(new java.util.Date().getTime());
+        comments.setCreateat(time);
+        comments.setUserid(userId);
+        if(articleCommentsMapper.insertSelective(comments) > 0) {
+            articleInfoMapper.increaseCommentNums(comments.getTargetid());
+            return Result.success();
+        }else {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }
+    }
 }

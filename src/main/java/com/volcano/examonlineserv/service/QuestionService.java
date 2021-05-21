@@ -56,7 +56,7 @@ public class QuestionService {
     public Result uploadQuestion(QuestionInfo questionInfo, String subjectName) {
         Integer subjectId = questionInfoMapper.getSubjectId(subjectName);
         questionInfo.setSubjectid(subjectId);
-        if(questionInfoMapper.insert(questionInfo) > 0) {
+        if(questionInfoMapper.insertSelective(questionInfo) > 0) {
             return Result.success();
         }else {
             return Result.failure(ResultCode.SYSTEM_INNER_ERROR);

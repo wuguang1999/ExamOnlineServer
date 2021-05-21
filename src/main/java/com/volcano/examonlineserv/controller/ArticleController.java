@@ -1,6 +1,7 @@
 package com.volcano.examonlineserv.controller;
 
 import com.volcano.examonlineserv.bean.ArticleInfo;
+import com.volcano.examonlineserv.bean.Comments;
 import com.volcano.examonlineserv.bean.CommentsResponse;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
@@ -84,6 +85,20 @@ public class ArticleController {
         return Result.getListResult(list);
     }
 
+    @PostMapping("/api/v1/articles/uploadcomment")
+    public Result uploadArticleComment(@RequestHeader String authorization, @RequestBody CommentBean commentBean) {
+        Result res;
+        if(null == authorization || null == JwtUtil.validateToken(authorization)) {
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
+            return res;
+        }
+        Comments comments = new Comments();
+        comments.setTargetid(commentBean.targetId); comments.setType(commentBean.type);
+        comments.setDescription(commentBean.description);
+        res = articleService.uploadArticleComment(JwtUtil.validateToken(authorization), comments);
+        return res;
+    }
+
     @Data
     public static class ArticleTmp{
 
@@ -112,5 +127,11 @@ public class ArticleController {
         }
     }
 
-
+    @Data
+    public static class CommentBean {
+        Integer targetId;
+        String type;
+        String description;
+        String img;
+    }
 }

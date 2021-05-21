@@ -5,6 +5,7 @@ import com.volcano.examonlineserv.bean.ArticleInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface ArticleInfoMapper {
     long countByExample(ArticleInfoExample example);
@@ -38,4 +39,9 @@ public interface ArticleInfoMapper {
     @Select("SELECT * FROM articleinfo " +
             "WHERE description LIKE #{content,jdbcType=VARCHAR} OR title LIKE #{content,jdbcType=VARCHAR}")
     List<ArticleInfo> searchArticles(@Param("content") String content);
+
+    @Update("UPDATE articleinfo " +
+            "SET commentNums = commentNums + 1 " +
+            "WHERE id = #{id,jdbcType=INTEGER}")
+    void increaseCommentNums(@Param("id") Integer id);
 }
