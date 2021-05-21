@@ -7,6 +7,7 @@ import java.util.List;
 import com.volcano.examonlineserv.bean.SubjectInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface QuestionInfoMapper {
     long countByExample(QuestionInfoExample example);
@@ -48,7 +49,7 @@ public interface QuestionInfoMapper {
     @Select("SELECT * " +
             "FROM questioninfo " +
             "WHERE subjectId = #{subjectId,jdbcType=INTEGER}")
-    List<QuestionInfo> getQuestions(Integer subjectId);
+    List<QuestionInfo> getQuestions(@Param("subjectId") Integer subjectId);
 
     @Select("SELECT * " +
             "FROM questioninfo " +
@@ -60,4 +61,12 @@ public interface QuestionInfoMapper {
 
     @Select("SELECT * FROM questioninfo WHERE subjectId = #{subjectId,jdbcType=INTEGER} AND description LIKE #{keywords,jdbcType=VARCHAR}")
     List<QuestionInfo> getCommendQuestions(@Param("subjectId") Integer subjectId, @Param("keywords") String keywords);
+
+    @Select("SELECT id FROM subjectinfo WHERE subjectName = #{subjectName,jdbcType=VARCHAR}")
+    Integer getSubjectId(@Param("subjectName") String name);
+
+    @Update("UPDATE questioninfo " +
+            "SET commentNums = commentNums + 1 " +
+            "WHERE id = #{id,jdbcType=INTEGER}")
+    void increaseCommentNums(@Param("id") Integer id);
 }

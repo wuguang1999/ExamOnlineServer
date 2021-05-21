@@ -37,11 +37,11 @@ public class ArticleService {
         return articleCommentsMapper.getArticleComments("文章",id);
     }
 
-    public Result uploadArticle(String userPhone, ArticleInfo articleInfo) {
+    public Result uploadArticle(Integer userId, ArticleInfo articleInfo) {
         Date time = new Date(new java.util.Date().getTime());
         articleInfo.setCreateat(time);
-        Userinfo userinfo = userinfoMapper.selectByPhone(userPhone);
-        articleInfo.setUserid(userinfo.getId());
+        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(userId);
+        articleInfo.setUserid(userId);
         articleInfo.setUsername(userinfo.getUsername());
         if(articleInfoMapper.insert(articleInfo) > 0) {
             return Result.success();

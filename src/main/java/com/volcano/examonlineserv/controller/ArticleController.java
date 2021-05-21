@@ -24,14 +24,8 @@ public class ArticleController {
      */
     @GetMapping("/api/v1/articles")
     public Result getArticles() {
-        Result res;
         List<ArticleInfo> list = articleService.getArticles();
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.RESULE_DATA_NONE);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -40,14 +34,8 @@ public class ArticleController {
      */
     @GetMapping("/api/v1/articles/hot")
     public Result getHotArticles() {
-        Result res;
         List<ArticleInfo> list = articleService.getHotArticles();
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -57,14 +45,8 @@ public class ArticleController {
      */
     @GetMapping("/api/v1/articles/comments")
     public Result getArticleComments(@RequestParam int id) {
-        Result res;
         List<CommentsResponse> list = articleService.getArticleComments(id);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -88,7 +70,7 @@ public class ArticleController {
             articleInfo.setImg(articleTmp.getImg());
         }
         articleInfo.setField(articleTmp.getField());
-        res = articleService.uploadArticle("130", articleInfo);
+        res = articleService.uploadArticle(id, articleInfo);
         return res;
     }
 
@@ -98,14 +80,8 @@ public class ArticleController {
      */
     @GetMapping("/api/v1/articles/search")
     public Result searchArticle(@RequestParam String content) {
-        Result res;
         List<ArticleInfo> list = articleService.searchArticle(content);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     @Data

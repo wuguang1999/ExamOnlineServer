@@ -1,6 +1,8 @@
 package com.volcano.examonlineserv.config;
 
 import java.io.Serializable;
+import java.util.List;
+
 /**
  * 状态码处理
  */
@@ -76,6 +78,14 @@ public class Result implements Serializable {
     public void setResultCode(ResultCode code) {
         this.code = code.code();
         this.msg = code.message();
+    }
+
+    public static Result getListResult(List list) {
+        if(list == null) {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }else {
+            return Result.success(list);
+        }
     }
 }
 

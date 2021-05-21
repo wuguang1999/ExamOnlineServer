@@ -1,8 +1,8 @@
 package com.volcano.examonlineserv.service;
 
+import com.volcano.examonlineserv.bean.Comments;
 import com.volcano.examonlineserv.bean.CommentsResponse;
 import com.volcano.examonlineserv.bean.QuestionInfo;
-import com.volcano.examonlineserv.bean.QuestionInfoExample;
 import com.volcano.examonlineserv.bean.SubjectInfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
@@ -11,6 +11,7 @@ import com.volcano.examonlineserv.mapper.QuestionInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class QuestionService {
         return questionInfoMapper.getSubjects();
     }
 
-    public List<QuestionInfo> getQuestions(Integer subjectId) {
-        List<QuestionInfo> records = questionInfoMapper.getQuestions(subjectId);
+    public List<QuestionInfo> getQuestions(String subjectName) {
+        List<QuestionInfo> records = questionInfoMapper.getQuestions(questionInfoMapper.getSubjectId(subjectName));
         return records;
     }
 
@@ -42,17 +43,19 @@ public class QuestionService {
         return comments;
     }
 
-    public List<QuestionInfo> getRandomQuestions(Integer subjectId, String num) {
-        int count = questionInfoMapper.countQuestions(subjectId);
+    public List<QuestionInfo> getRandomQuestions(String subjectName, String num) {
+        int count = questionInfoMapper.countQuestions(questionInfoMapper.getSubjectId(subjectName));
         List<QuestionInfo> records;
         if(Integer.parseInt(num) > count) {
             return null;
         }
-        records = questionInfoMapper.getRandomQuestions(subjectId, Integer.parseInt(num));
+        records = questionInfoMapper.getRandomQuestions(questionInfoMapper.getSubjectId(subjectName), Integer.parseInt(num));
         return records;
     }
 
-    public Result uploadQuestion(QuestionInfo questionInfo) {
+    public Result uploadQuestion(QuestionInfo questionInfo, String subjectName) {
+        Integer subjectId = questionInfoMapper.getSubjectId(subjectName);
+        questionInfo.setSubjectid(subjectId);
         if(questionInfoMapper.insert(questionInfo) > 0) {
             return Result.success();
         }else {
@@ -62,5 +65,17 @@ public class QuestionService {
 
     public List<QuestionInfo> getCommendQuestions(Integer subjectId, String keywords) {
         return questionInfoMapper.getCommendQuestions(subjectId, "%" + keywords + "%");
+    }
+
+    public Result uploadQuestionComment(Integer userId, Comments comments) {
+        Date time = new Date(new java.util.Date().getTime());
+        comments.setCreateat(time);
+        comments.setUserid(userId);
+        if(questionCommentsMapper.insert(comments) > 0) {
+            questionInfoMapper.increaseCommentNums(comments.getTargetid());
+            return Result.success();
+        }else {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }
     }
 }

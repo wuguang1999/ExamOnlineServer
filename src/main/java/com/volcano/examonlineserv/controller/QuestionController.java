@@ -1,5 +1,6 @@
 package com.volcano.examonlineserv.controller;
 
+import com.volcano.examonlineserv.bean.Comments;
 import com.volcano.examonlineserv.bean.CommentsResponse;
 import com.volcano.examonlineserv.bean.QuestionInfo;
 import com.volcano.examonlineserv.bean.SubjectInfo;
@@ -7,6 +8,7 @@ import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.QuestionService;
 import com.volcano.examonlineserv.utils.JwtUtil;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +26,8 @@ public class QuestionController {
      */
     @GetMapping("/api/v1/questions/subject")
     public Result getSubjects() {
-        Result res;
         List<SubjectInfo> list = questionService.getSubjects();
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -39,15 +35,9 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/api/v1/questions")
-    public Result getQuestions(@RequestParam Integer subjectId) {
-        Result res;
-        List<QuestionInfo> list = questionService.getQuestions(subjectId);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.RESULE_DATA_NONE);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+    public Result getQuestions(@RequestParam String subjectName) {
+        List<QuestionInfo> list = questionService.getQuestions(subjectName);
+        return Result.getListResult(list);
     }
 
     /**
@@ -63,12 +53,7 @@ public class QuestionController {
             return res;
         }
         List<QuestionInfo> list = questionService.searchQuestion(content);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -78,14 +63,8 @@ public class QuestionController {
      */
     @GetMapping("/api/v1/questions/comments")
     public Result getQuestionComments(@RequestParam int id) {
-        Result res;
         List<CommentsResponse> list = questionService.getQuestionComments(id);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     /**
@@ -95,19 +74,14 @@ public class QuestionController {
      *
      */
     @GetMapping("/api/v1/questions/random")
-    public Result getRandomQuestions(@RequestParam Integer subjectId , @RequestParam String num) {
+    public Result getRandomQuestions(@RequestParam String subjectName , @RequestParam String num) {
         Result res;
         if(null == num || num.equals("")) {
             res = Result.failure(ResultCode.PARAM_IS_INVALID);
             return res;
         }
-        List<QuestionInfo> list = questionService.getRandomQuestions(subjectId, num);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.DATA_IS_WRONG);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        List<QuestionInfo> list = questionService.getRandomQuestions(subjectName, num);
+        return Result.getListResult(list);
     }
 
     /**
@@ -115,25 +89,67 @@ public class QuestionController {
      * @return
      */
     @PostMapping("/api/v1/questions/edit")
-    public Result uploadQuestion(@RequestHeader String authorization, @RequestBody QuestionInfo questionInfo) {
+    public Result uploadQuestion(@RequestHeader String authorization, @RequestBody UploadBean uploadBean) {
         Result res;
         if(null == authorization || null == JwtUtil.validateToken(authorization)) {
             res = Result.failure(ResultCode.DATA_IS_WRONG);
             return res;
         }
-        res = questionService.uploadQuestion(questionInfo);
+        QuestionInfo questionInfo = new QuestionInfo();
+        questionInfo.setSource(uploadBean.source); questionInfo.setLevel(uploadBean.level);
+        questionInfo.setKeywords(uploadBean.keywords); questionInfo.setDescription(uploadBean.description);
+        questionInfo.setType(uploadBean.type); questionInfo.setImg(null);
+        questionInfo.setOptiona(uploadBean.optiona); questionInfo.setOptionb(uploadBean.optionb);
+        questionInfo.setOptionc(uploadBean.optionc); questionInfo.setOptiond(uploadBean.optiond);
+        questionInfo.setOptione(uploadBean.optione); questionInfo.setCorrectanswer(uploadBean.correctanswer);
+        questionInfo.setAnalysis(uploadBean.analysis);
+        res = questionService.uploadQuestion(questionInfo, uploadBean.subjectName);
         return res;
     }
 
     @GetMapping("/api/v1/questions/commend")
     public Result getCommendQuestions(@RequestParam Integer subjectId ,@RequestParam String keywords) {
-        Result res;
         List<QuestionInfo> list = questionService.getCommendQuestions(subjectId, keywords);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.RESULE_DATA_NONE);
-        }else {
-            res = Result.success(list);
+        return Result.getListResult(list);
+    }
+
+    @PostMapping("/api/v1/questions/uploadcomment")
+    public Result uploadQuestionComment(@RequestHeader String authorization, @RequestBody CommentBean commentBean) {
+        Result res;
+        if(null == authorization || null == JwtUtil.validateToken(authorization)) {
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
+            return res;
         }
+        Comments comments = new Comments();
+        comments.setTargetid(commentBean.targetId); comments.setType(commentBean.type);
+        comments.setDescription(commentBean.description);
+        res = questionService.uploadQuestionComment(JwtUtil.validateToken(authorization), comments);
         return res;
+    }
+
+    @Data
+    public static class UploadBean {
+        String subjectName;
+        String source;
+        String level;
+        String keywords;
+        String description;
+        String type;
+        String img;
+        String optiona;
+        String optionb;
+        String optionc;
+        String optiond;
+        String optione;
+        String correctanswer;
+        String analysis;
+    }
+
+    @Data
+    public static class CommentBean {
+        Integer targetId;
+        String type;
+        String description;
+        String img;
     }
 }

@@ -137,24 +137,13 @@ public class UserController {
             return res;
         }
         List<ArticleInfo> list = userService.getMyArticles(id);
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     @GetMapping("/api/v1/userinfo/ranking")
     public Result getRankings() {
-        Result res;
         List<RankingResponse> list = userService.getRankings();
-        if(list == null || list.isEmpty()) {
-            res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
-        }else {
-            res = Result.success(list);
-        }
-        return res;
+        return Result.getListResult(list);
     }
 
     @Data
