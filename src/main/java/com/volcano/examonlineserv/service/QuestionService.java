@@ -71,7 +71,7 @@ public class QuestionService {
         Date time = new Date(new java.util.Date().getTime());
         comments.setCreateat(time);
         comments.setUserid(userId);
-        if(questionCommentsMapper.insert(comments) > 0) {
+        if(questionCommentsMapper.insertSelective(comments) > 0) {
             questionInfoMapper.increaseCommentNums(comments.getTargetid());
             return Result.success();
         }else {

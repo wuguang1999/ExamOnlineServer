@@ -99,4 +99,13 @@ public class UserService {
         return userinfoMapper.getRankings();
     }
 
+    public Result uploadAvatar(Integer userId, String path) {
+        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(userId);
+        userinfo.setAvatar(path);
+        if(userinfoMapper.updateByPrimaryKeySelective(userinfo) > 0) {
+            return Result.success();
+        }else {
+            return Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+        }
+    }
 }

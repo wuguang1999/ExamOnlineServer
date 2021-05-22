@@ -11,6 +11,13 @@ spring:
     format:
       date: yyyy-MM-dd
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+  web:
+    resources:
+      static-locations: file:D://IdeaProjects//ExamOnlineServer//target//classes//static//upload
 server:
   port: 8080
   servlet:

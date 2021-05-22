@@ -6,10 +6,17 @@ import com.volcano.examonlineserv.bean.Userinfo;
 import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.UserService;
+import com.volcano.examonlineserv.utils.ConstantData;
 import com.volcano.examonlineserv.utils.JwtUtil;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -146,12 +153,68 @@ public class UserController {
         return Result.getListResult(list);
     }
 
+    @PostMapping("/api/v1/userinfo/uploadAvatar")
+    public Result uploadAvatar(@RequestHeader String authorization, @RequestPart("file") MultipartFile file) {
+        Result res;
+        if(null == authorization || null == JwtUtil.validateToken(authorization)) {
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
+            return res;
+        }
+        String filename = file.getOriginalFilename();
+        filename = getFileName(filename);
+        String filepath = getImgPath();
+        if(!file.isEmpty()) {
+            try ( BufferedOutputStream bos = new BufferedOutputStream(
+                    new FileOutputStream(new File(filepath + File.separator + filename)))) {
+                bos.write(file.getBytes());
+                bos.flush();
+                res = userService.uploadAvatar(JwtUtil.validateToken(authorization), ConstantData.BASE_URL + filename);
+            } catch (Exception e) {
+                res = Result.failure(ResultCode.SYSTEM_INNER_ERROR);
+            }
+        }else {
+            res = Result.failure(ResultCode.PARAM_IS_BLANK);
+        }
+        return res;
+    }
+
+    /**
+     * 文件名后缀前添加一个时间戳
+     */
+    private String getFileName(String fileName) {
+        int index = fileName.lastIndexOf(".");
+        final SimpleDateFormat sDateFormate = new SimpleDateFormat("yyyymmddHHmmss");  //设置时间格式
+        String nowTimeStr = sDateFormate.format(new Date()); // 当前时间
+        fileName = fileName.substring(0, index) + "_" + nowTimeStr + fileName.substring(index);
+        return fileName;
+    }
+
+    /**
+     * 获取当前系统路径
+     */
+    private String getImgPath() {
+        File path = null;
+        try {
+            path = new File(ResourceUtils.getURL("classpath:").getPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(!path.exists()) {
+            path = new File("");
+        }
+        File upload =  new File(path.getAbsolutePath(), "static/upload/");
+        if(!upload.exists()) {
+            upload.mkdirs();
+        }
+        return upload.getAbsolutePath();
+    }
+
     @Data
     public static class UserTmp {
         private String phone;
         private String username;
         private String pwd;
-        private byte[] avatar;
+        private String avatar;
     }
 
     @Data

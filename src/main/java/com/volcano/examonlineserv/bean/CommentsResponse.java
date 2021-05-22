@@ -8,7 +8,7 @@ public class CommentsResponse {
     private String description;
     private String img;
     private Integer zan;
-    private byte[] avatar;
+    private String avatar;
     private Date createat;
 
     public Integer getId() {
@@ -43,11 +43,11 @@ public class CommentsResponse {
         this.img = img;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

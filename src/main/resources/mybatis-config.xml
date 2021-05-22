@@ -37,11 +37,11 @@
 
 
 
-<!--        <table tableName="userinfo" domainObjectName="Userinfo"/>-->
-        <table tableName="questioninfo" domainObjectName="QuestionInfo"/>
-<!--        <table tableName="subjectinfo" domainObjectName="SubjectInfo"/>-->
-<!--        <table tableName="articleinfo" domainObjectName="ArticleInfo"/>-->
-<!--        <table tableName="comments" domainObjectName="Comments"/>-->
+        <table tableName="userinfo" domainObjectName="Userinfo"/>
+<!--        <table tableName="questioninfo" domainObjectName="QuestionInfo"/>-->
+<!--&lt;!&ndash;        <table tableName="subjectinfo" domainObjectName="SubjectInfo"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <table tableName="articleinfo" domainObjectName="ArticleInfo"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <table tableName="comments" domainObjectName="Comments"/>&ndash;&gt;-->
 
 
     </context>

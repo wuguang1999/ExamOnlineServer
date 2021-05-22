@@ -24,24 +24,24 @@ class ExamonlineservApplicationTests {
     void contextLoads() {
     }
 
-
-    @Test
-    public void insertUser() throws IOException {
-        Userinfo userinfo = new Userinfo();
-        FileInputStream fis = new FileInputStream("d://group.png");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        BufferedImage read = ImageIO.read(fis);
-        ImageIO.write(read, "png", baos);
-        byte[] bytes = baos.toByteArray();
-        userinfo.setUsername("test");
-        userinfo.setPwd("123");
-        userinfo.setPhone("000000");
-        userinfo.setCreateat(new Date());
-        userinfo.setAvatar(bytes);
-        userinfoMapper.insert(userinfo);
-        baos.close();
-        fis.close();
-    }
+//
+//    @Test
+//    public void insertUser() throws IOException {
+//        Userinfo userinfo = new Userinfo();
+//        FileInputStream fis = new FileInputStream("d://group.png");
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        BufferedImage read = ImageIO.read(fis);
+//        ImageIO.write(read, "png", baos);
+//        byte[] bytes = baos.toByteArray();
+//        userinfo.setUsername("test");
+//        userinfo.setPwd("123");
+//        userinfo.setPhone("000000");
+//        userinfo.setCreateat(new Date());
+//        userinfo.setAvatar(bytes);
+//        userinfoMapper.insert(userinfo);
+//        baos.close();
+//        fis.close();
+//    }
 
     @Test
     public void testDownLoadImgFromDataBase() {
@@ -49,7 +49,7 @@ class ExamonlineservApplicationTests {
             //按id查询用户信息
             Userinfo userinfo = userinfoMapper.selectByPrimaryKey(7);
             //读取从数据库查到的用户头像
-            byte[] origin = userinfo.getAvatar();
+            String origin = userinfo.getAvatar();
             System.out.println(origin);
             String str = new String(origin);
             System.out.println(str);
@@ -70,7 +70,7 @@ class ExamonlineservApplicationTests {
     public void query() {
         try{
             Userinfo userinfo = userinfoMapper.selectByPrimaryKey(4);
-            byte[] a = userinfo.getAvatar();
+            String a = userinfo.getAvatar();
             System.out.println(a);
         }catch (Exception e) {
             e.printStackTrace();

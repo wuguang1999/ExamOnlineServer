@@ -11,11 +11,11 @@ public class Userinfo {
 
     private String pwd;
 
+    private String avatar;
+
     private Integer accumulate;
 
     private Date createat;
-
-    private byte[] avatar;
 
     public Integer getId() {
         return id;
@@ -49,6 +49,14 @@ public class Userinfo {
         this.pwd = pwd == null ? null : pwd.trim();
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
+
     public Integer getAccumulate() {
         return accumulate;
     }
@@ -63,13 +71,5 @@ public class Userinfo {
 
     public void setCreateat(Date createat) {
         this.createat = createat;
-    }
-
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
     }
 }
