@@ -5,7 +5,7 @@ public class RankingResponse {
     private int id;
     private String userphone;
     private String username;
-    private byte[] avatar;
+    private String avatar;
     private int accumulate;
 
     public int getId() {
@@ -32,12 +32,12 @@ public class RankingResponse {
         this.username = username;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
+    public String getAvatar() {
+        return avatar;
     }
 
     public int getAccumulate() {

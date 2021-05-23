@@ -29,8 +29,9 @@ public class UserService {
 
     public ResultCode editUserInfo(Userinfo userinfo) {
         String phone = userinfo.getPhone();
-        if(phone != null || phone != "") {
-            if(userinfoMapper.selectByPhone(phone) != null) {
+        if(phone != null && phone != "") {
+            Userinfo user = userinfoMapper.selectByPhone(phone);
+            if(user != null && user.getId() != userinfo.getId()) {
                 return ResultCode.USER_HAS_EXISTED;
             }
         }
@@ -63,14 +64,9 @@ public class UserService {
         if(null != user) {
             return false;
         }
-        user = new Userinfo();
-        user.setPhone(u.getPhone());
-        user.setPwd(u.getPwd());
-        user.setUsername(u.getUsername());
-        user.setAvatar(u.getAvatar());
         Date time = new Date(new java.util.Date().getTime());
-        user.setCreateat(time);
-        return userinfoMapper.insert(user) > 0;
+        u.setCreateat(time);
+        return userinfoMapper.insertSelective(u) > 0;
     }
 
     @Transactional

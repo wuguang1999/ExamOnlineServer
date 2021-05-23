@@ -43,7 +43,7 @@ public class ArticleService {
         Userinfo userinfo = userinfoMapper.selectByPrimaryKey(userId);
         articleInfo.setUserid(userId);
         articleInfo.setUsername(userinfo.getUsername());
-        if(articleInfoMapper.insert(articleInfo) > 0) {
+        if(articleInfoMapper.insertSelective(articleInfo) > 0) {
             return Result.success();
         }else {
             return Result.failure(ResultCode.SYSTEM_INNER_ERROR);

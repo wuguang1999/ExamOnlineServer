@@ -7,6 +7,7 @@ import com.volcano.examonlineserv.config.Result;
 import com.volcano.examonlineserv.config.ResultCode;
 import com.volcano.examonlineserv.service.UserService;
 import com.volcano.examonlineserv.utils.ConstantData;
+import com.volcano.examonlineserv.utils.ImageLoader;
 import com.volcano.examonlineserv.utils.JwtUtil;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +61,7 @@ public class UserController {
         userinfo.setId(JwtUtil.validateToken(token));
         userinfo.setPhone(userTmp.getPhone());
         userinfo.setUsername(userTmp.getUsername());
-        userinfo.setAvatar(userTmp.getAvatar());
-        Result res = new Result();
-        res.setResultCode(userService.editUserInfo(userinfo));
-        return res;
+        return Result.success(userService.editUserInfo(userinfo));
     }
 
     /**
@@ -160,9 +158,8 @@ public class UserController {
             res = Result.failure(ResultCode.DATA_IS_WRONG);
             return res;
         }
-        String filename = file.getOriginalFilename();
-        filename = getFileName(filename);
-        String filepath = getImgPath();
+        String filename = ImageLoader.getFileName(file.getOriginalFilename());
+        String filepath = ImageLoader.getImgPath();
         if(!file.isEmpty()) {
             try ( BufferedOutputStream bos = new BufferedOutputStream(
                     new FileOutputStream(new File(filepath + File.separator + filename)))) {
@@ -176,37 +173,6 @@ public class UserController {
             res = Result.failure(ResultCode.PARAM_IS_BLANK);
         }
         return res;
-    }
-
-    /**
-     * 文件名后缀前添加一个时间戳
-     */
-    private String getFileName(String fileName) {
-        int index = fileName.lastIndexOf(".");
-        final SimpleDateFormat sDateFormate = new SimpleDateFormat("yyyymmddHHmmss");  //设置时间格式
-        String nowTimeStr = sDateFormate.format(new Date()); // 当前时间
-        fileName = fileName.substring(0, index) + "_" + nowTimeStr + fileName.substring(index);
-        return fileName;
-    }
-
-    /**
-     * 获取当前系统路径
-     */
-    private String getImgPath() {
-        File path = null;
-        try {
-            path = new File(ResourceUtils.getURL("classpath:").getPath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        if(!path.exists()) {
-            path = new File("");
-        }
-        File upload =  new File(path.getAbsolutePath(), "static/upload/");
-        if(!upload.exists()) {
-            upload.mkdirs();
-        }
-        return upload.getAbsolutePath();
     }
 
     @Data
